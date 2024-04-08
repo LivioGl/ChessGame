@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "ChessPiece.h"
 #include "CoreMinimal.h"
 #include "GameField.h"
 #include "GameFramework/GameModeBase.h"
@@ -16,10 +17,13 @@ class CHESS_PROJECT_API AMainGameMode : public AGameModeBase
 	GENERATED_BODY()
 	
 public:
-	// Puntatore GameField: lo sfrutto per il riferimento alla GameField
+	// Pointer to GameField: Gamefield reference
 	UPROPERTY(VisibleAnywhere)
 	AGameField* Field;
 
+	// Pointer to main class ChessPiece: Piece reference
+	UPROPERTY(VisibleAnywhere)
+	AChessPiece* Piece;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;

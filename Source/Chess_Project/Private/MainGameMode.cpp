@@ -16,4 +16,8 @@ void AMainGameMode::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("GFieldClass null"));
 	}
+	
+
 }
+
+
