@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Tile.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ChessPiece.generated.h"
@@ -14,6 +15,8 @@ class CHESS_PROJECT_API AChessPiece : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AChessPiece();
+
+	FVector GetRelativeLocationByXYPosition(const int32 InX, const int32 InY) const;
 
 protected:
 	// Called when the game starts or when spawned

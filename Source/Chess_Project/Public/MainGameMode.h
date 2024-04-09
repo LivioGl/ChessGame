@@ -9,7 +9,7 @@
 #include "MainGameMode.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class CHESS_PROJECT_API AMainGameMode : public AGameModeBase
@@ -28,7 +28,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;
 
-	// Creare attore campo
+	void ChangeMaterial(AGPawn* P, FString F);
+
 	// Proprietà di riferimento alla classe della GameField
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGameField> GFieldClass;

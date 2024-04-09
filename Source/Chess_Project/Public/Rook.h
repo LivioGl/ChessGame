@@ -16,6 +16,9 @@ public:
 	// Sets default values for this actor's properties
 	ARook();
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AChessPiece> Rook;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

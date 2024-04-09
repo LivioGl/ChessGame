@@ -25,3 +25,8 @@ void AChessPiece::Tick(float DeltaTime)
 
 }
 
+FVector AChessPiece::GetRelativeLocationByXYPosition(const int32 InX, const int32 InY) const
+{
+	return TileSize * FVector(InX, InY, 0);
+
+}

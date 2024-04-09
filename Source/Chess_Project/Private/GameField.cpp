@@ -23,6 +23,7 @@ void AGameField::BeginPlay()
 {
 	Super::BeginPlay();
 	GenerateField();
+
 	
 }
 
@@ -51,6 +52,7 @@ void AGameField::GenerateField()
 			TileMap.Add(FVector2D(x, y), Obj);
 		}
 	}
+
 }
 
 TArray<ATile*>& AGameField::GetTileArray()

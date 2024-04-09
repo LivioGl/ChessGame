@@ -16,6 +16,9 @@ public:
 	// Sets default values for this actor's properties
 	ABishop();
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AChessPiece> Bishop;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
