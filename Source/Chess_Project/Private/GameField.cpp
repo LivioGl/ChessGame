@@ -62,15 +62,25 @@ void AGameField::SpawnPieces()
 	// Parto dalla riga di pedoni bianchi
 	for (int32 b = 0; b < 8; b++)
 	{
-		// Pointer to GameField 
-		// Tiene la posizione delle pedine nella seconda riga
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(1, b);
 		AGPawn* Pawn;
 		Pawn = GetWorld()->SpawnActor<AGPawn>(GPawn, Location, FRotator::ZeroRotator);
 		const float PawnScale = PieceSize / 100;
 		Pawn->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
 		Pawn->SetGridPosition(1, b);
-		// ChangeMaterial("MI_WhitePawn", Pawn);
+		FString W = TEXT("MI_WhitePawn");
+		ChangeMaterial(W, Pawn);
+	}
+	for (int32 b = 0; b < 8; b++)
+	{
+		FVector Location = AGameField::GetRelativeLocationByXYPosition(6, b);
+		AGPawn* Pawn;
+		Pawn = GetWorld()->SpawnActor<AGPawn>(GPawn, Location, FRotator::ZeroRotator);
+		const float PawnScale = PieceSize / 100;
+		Pawn->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
+		Pawn->SetGridPosition(1, b);
+		FString B = TEXT("MI_BlackPawn");
+		ChangeMaterial(B, Pawn);
 	}
 	
 }
@@ -78,7 +88,6 @@ void AGameField::SpawnPieces()
 void AGameField::ChangeMaterial(FString F, AGPawn* P) 
 {
 	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *("/Game/Materials/" + F)));
-	// Problema funzione GetStatMeshComp()
 	UStaticMeshComponent* Comp = P->GetStatMeshComp();
 	Comp->SetMaterial(0, Material);
 	
