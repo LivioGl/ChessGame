@@ -22,16 +22,4 @@ void AMainGameMode::BeginPlay()
 }
 
 
-// const TArray<FString> Materials = {"WhitePawn", "BlackPawn", "WhiteKing", "BlackKing", "WhiteQueen", "BlackQueen", "WhiteRook", "BlackRook", "WhiteBishop", "BlackBishop", "WhiteKnight", "BlackKnight"};
 
-// Aggiungere puntatore nell'input di questa funzione, deve riconoscere Obj
-/*
-void AMainGameMode::ChangeMaterial(AGPawn* P, FString F)
-{
-	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *("/Game/Materials/" + F)));
-	// Problema funzione GetStatMeshComp()
-	UStaticMeshComponent* Comp = P->GetStatMeshComp();
-	Comp->SetMaterial(0, Material);
-	
-}
-*/

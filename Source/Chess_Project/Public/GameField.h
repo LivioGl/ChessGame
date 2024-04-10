@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-// Is it necessary?
+
+#include "Rook.h"
+#include "Bishop.h"
 #include "GPawn.h"
 #include "Tile.h"
 #include "CoreMinimal.h"
@@ -42,6 +44,12 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AChessPiece> GPawn;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ABishop> Bishop;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ARook> Rook;
+
 	// tile size
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float TileSize;
@@ -63,7 +71,9 @@ public:
 	void SpawnPieces();
 
 	// Assign black or white color to a piece
-	void ChangeMaterial(FString F, AGPawn* P); // AGPawn* P, FString F
+	void ChangeMaterialPawn(FString F, AGPawn* P); 
+	void ChangeMaterialBishop(FString F, ABishop* B);
+	void ChangeMaterial(FString F, TSubclassOf<AChessPiece>* S);
 
 	// return the array of tile pointers
 	TArray<ATile*>& GetTileArray();

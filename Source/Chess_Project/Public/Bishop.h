@@ -15,11 +15,9 @@ class CHESS_PROJECT_API ABishop : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ABishop();
-
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AChessPiece> Bishop;
-
 	UStaticMeshComponent* GetStatMeshComp();
+	// UPROPERTY(EditDefaultsOnly)
+	// TSubclassOf<AChessPiece> Bishop;
 
 protected:
 	// Called when the game starts or when spawned

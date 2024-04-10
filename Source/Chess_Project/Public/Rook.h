@@ -15,10 +15,6 @@ class CHESS_PROJECT_API ARook : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ARook();
-
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AChessPiece> Rook;
-
 	UStaticMeshComponent* GetStatMeshComp();
 
 protected:
