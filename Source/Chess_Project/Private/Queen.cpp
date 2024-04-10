@@ -25,3 +25,7 @@ void AQueen::Tick(float DeltaTime)
 
 }
 
+UStaticMeshComponent* AQueen::GetStatMeshComp()
+{
+	return StaticMeshComponent;
+}

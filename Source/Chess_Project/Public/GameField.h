@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+// Is it necessary?
+#include "GPawn.h"
 #include "Tile.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -38,9 +39,15 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ATile> TileClassWhite;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AChessPiece> GPawn;
+
 	// tile size
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float TileSize;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float PieceSize;
 
 	// Called when an instance of this class is placed (in editor) or spawned
 	virtual void OnConstruction(const FTransform& Transform) override;
@@ -51,6 +58,12 @@ public:
 
 	// generate an empty game field
 	void GenerateField();
+
+	// Generates the pieces
+	void SpawnPieces();
+
+	// Assign black or white color to a piece
+	void ChangeMaterial(FString F, AGPawn* P); // AGPawn* P, FString F
 
 	// return the array of tile pointers
 	TArray<ATile*>& GetTileArray();

@@ -7,7 +7,7 @@
 AChessPiece::AChessPiece()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
@@ -25,8 +25,13 @@ void AChessPiece::Tick(float DeltaTime)
 
 }
 
-FVector AChessPiece::GetRelativeLocationByXYPosition(const int32 InX, const int32 InY) const
-{
-	return TileSize * FVector(InX, InY, 0);
 
+FVector2D AChessPiece::GetGridPosition()
+{
+	return PieceGridPosition;
+}
+
+void AChessPiece::SetGridPosition(const double InX, const double InY)
+{
+	PieceGridPosition.Set(InX, InY);
 }

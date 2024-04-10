@@ -12,19 +12,7 @@ void AMainGameMode::BeginPlay()
 	{
 		// Spawn Actor di tipo Class e salvo come attributo il puntatore, così posso accederci in qualsiasi momento
 		Field = GetWorld()->SpawnActor<AGameField>(GFieldClass);
-		
-		// Inizio spawn pedine
-		// Parto dalla riga di pedoni bianchi
-		for (int32 b = 0; b < 8; b++)
-		{
-			// Pointer to GameField 
-			// Tiene la posizione delle pedine nella seconda riga
-			FVector Location = Field->GetRelativeLocationByXYPosition(1, b);
-			AGPawn* Pawn;
-			// Errore 3: verificare che funzioni l'aggiornamento del vettore location
-			// P = GetWorld()->SpawnActor<AChessPiece>(AGPawn, Location, FRotator::ZeroRotator)
 
-		}
 	}
 	else 
 	{
@@ -37,13 +25,13 @@ void AMainGameMode::BeginPlay()
 // const TArray<FString> Materials = {"WhitePawn", "BlackPawn", "WhiteKing", "BlackKing", "WhiteQueen", "BlackQueen", "WhiteRook", "BlackRook", "WhiteBishop", "BlackBishop", "WhiteKnight", "BlackKnight"};
 
 // Aggiungere puntatore nell'input di questa funzione, deve riconoscere Obj
-
+/*
 void AMainGameMode::ChangeMaterial(AGPawn* P, FString F)
 {
 	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *("/Game/Materials/" + F)));
 	// Problema funzione GetStatMeshComp()
-	//UStaticMeshComponent* Comp = P->GetStatMeshComp();
-	//Comp->SetMaterial(0, Material);
+	UStaticMeshComponent* Comp = P->GetStatMeshComp();
+	Comp->SetMaterial(0, Material);
 	
 }
-
+*/

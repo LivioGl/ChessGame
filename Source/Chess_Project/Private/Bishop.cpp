@@ -25,3 +25,7 @@ void ABishop::Tick(float DeltaTime)
 
 }
 
+UStaticMeshComponent* ABishop::GetStatMeshComp()
+{
+	return StaticMeshComponent;
+}

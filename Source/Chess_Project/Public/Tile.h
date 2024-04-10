@@ -38,6 +38,8 @@ public:
 	// get the (x, y) position
 	FVector2D GetGridPosition();
 
+	UStaticMeshComponent* GetStatMeshComp();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -60,6 +62,7 @@ protected:
 	FVector2D TileGridPosition;
 
 public:	
+
 	// Called every frame
 	// virtual void Tick(float DeltaTime) override;
 

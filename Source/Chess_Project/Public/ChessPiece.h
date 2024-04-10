@@ -16,7 +16,12 @@ public:
 	// Sets default values for this actor's properties
 	AChessPiece();
 
-	FVector GetRelativeLocationByXYPosition(const int32 InX, const int32 InY) const;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FVector2D PieceGridPosition;
+	
+	FVector2D GetGridPosition();
+
+	void SetGridPosition(const double InX, const double InY);
 
 protected:
 	// Called when the game starts or when spawned

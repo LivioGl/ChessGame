@@ -25,3 +25,7 @@ void AKnight::Tick(float DeltaTime)
 
 }
 
+UStaticMeshComponent* AKnight::GetStatMeshComp()
+{
+	return StaticMeshComponent;
+}

@@ -28,8 +28,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;
 
-	void ChangeMaterial(AGPawn* P, FString F);
-
 	// Proprietà di riferimento alla classe della GameField
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGameField> GFieldClass;

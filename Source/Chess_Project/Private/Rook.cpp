@@ -25,3 +25,7 @@ void ARook::Tick(float DeltaTime)
 
 }
 
+UStaticMeshComponent* ARook::GetStatMeshComp()
+{
+	return StaticMeshComponent;
+}
