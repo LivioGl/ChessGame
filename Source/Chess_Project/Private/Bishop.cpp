@@ -12,6 +12,8 @@ ABishop::ABishop()
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
+	MaterialBlack = TEXT("/Game/Materials/MI_BlackBishop");
+	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
 }
 
 // Called when the game starts or when spawned
@@ -28,7 +30,3 @@ void ABishop::Tick(float DeltaTime)
 
 }
 
-UStaticMeshComponent* ABishop::GetStatMeshComp()
-{
-	return StaticMeshComponent;
-}

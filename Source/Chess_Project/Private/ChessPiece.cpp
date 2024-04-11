@@ -8,6 +8,10 @@ AChessPiece::AChessPiece()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	/*Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
+	SetRootComponent(Scene);
+	StaticMeshComponent->SetupAttachment(Scene);*/
 
 }
 
@@ -34,4 +38,9 @@ FVector2D AChessPiece::GetGridPosition()
 void AChessPiece::SetGridPosition(const double InX, const double InY)
 {
 	PieceGridPosition.Set(InX, InY);
+}
+
+UStaticMeshComponent* AChessPiece::GetStatMeshComp()
+{
+	return StaticMeshComponent;
 }

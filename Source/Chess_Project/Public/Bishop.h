@@ -15,7 +15,6 @@ class CHESS_PROJECT_API ABishop : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ABishop();
-	UStaticMeshComponent* GetStatMeshComp();
 	// UPROPERTY(EditDefaultsOnly)
 	// TSubclassOf<AChessPiece> Bishop;
 
@@ -23,11 +22,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USceneComponent* Scene;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* StaticMeshComponent;
+	UStaticMeshComponent* StaticMeshComponent;*/
 
 public:	
 	// Called every frame

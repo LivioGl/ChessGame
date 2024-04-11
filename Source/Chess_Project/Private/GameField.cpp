@@ -59,7 +59,6 @@ void AGameField::GenerateField()
 
 void AGameField::SpawnPieces() 
 {
-	TArray<FString> StringMaterials = {TEXT("MI_WhitePawn"), TEXT("MI_BlackPawn"), TEXT("MI_WhiteBishop"), TEXT("MI_BlackBishop"), TEXT("MI_WhiteRook"), TEXT("MI_BlackRook")};
 	// Spawning White Pawns
 	for (int32 b = 0; b < 8; b++)
 	{
@@ -69,7 +68,7 @@ void AGameField::SpawnPieces()
 		const float PawnScale = PieceSize / 100;
 		Pawn->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
 		Pawn->SetGridPosition(1, b);
-		ChangeMaterialPawn(StringMaterials[0], Pawn);
+		ChangeMaterial(Pawn, false);
 	}
 	// Spawning Black Pawns
 	for (int32 b = 0; b < 8; b++)
@@ -80,7 +79,7 @@ void AGameField::SpawnPieces()
 		const float PawnScale = PieceSize / 100;
 		Pawn->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
 		Pawn->SetGridPosition(6, b);
-		ChangeMaterialPawn(StringMaterials[1], Pawn);
+		ChangeMaterial(Pawn, true);
 	}
 	// Spawning White Bishops
 	for (int32 b = 2; b < 6; b+=3)
@@ -91,7 +90,7 @@ void AGameField::SpawnPieces()
 		const float PawnScale = PieceSize / 100;
 		PBishop->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
 		PBishop->SetGridPosition(0, b);
-		ChangeMaterialBishop(StringMaterials[2], PBishop);
+		ChangeMaterial(PBishop, false);
 	}
 	// Spawning Black Bishops
 	for (int32 b = 2; b < 6; b += 3)
@@ -102,41 +101,42 @@ void AGameField::SpawnPieces()
 		const float PawnScale = PieceSize / 100;
 		PBishop->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
 		PBishop->SetGridPosition(7, b);
-		ChangeMaterialBishop(StringMaterials[3], PBishop);
+		ChangeMaterial(PBishop, true);
 	}
 	// Spawning White Rooks
 	for (int32 b = 0; b < 9; b += 7)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(0, b);
-		ARook* PRook;
-		PRook = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
+		ARook* Rook1;
+		Rook1 = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
 		const float PawnScale = PieceSize / 100;
-		PRook->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
-		PRook->SetGridPosition(0, b);
+		Rook1->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
+		Rook1->SetGridPosition(0, b);
+		ChangeMaterial(Rook1, false);
+	}
+	// Spawning Black Rooks
+	for (int32 b = 0; b < 9; b += 7)
+	{
+		FVector Location = AGameField::GetRelativeLocationByXYPosition(7, b);
+		ARook* Rook2;
+		Rook2 = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
+		const float PawnScale = PieceSize / 100;
+		Rook2->SetActorScale3D(FVector(PawnScale, PawnScale, 0.2));
+		Rook2->SetGridPosition(0, b);
+		ChangeMaterial(Rook2, true);
 	}
 }
 
-void AGameField::ChangeMaterialPawn(FString F, AGPawn* P) 
-{
-	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *("/Game/Materials/" + F)));
-	UStaticMeshComponent* Comp = P->GetStatMeshComp();
-	Comp->SetMaterial(0, Material);
-}
-void AGameField::ChangeMaterialBishop(FString F, ABishop* B)
-{
-	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *("/Game/Materials/" + F)));
-	UStaticMeshComponent* Comp = B->GetStatMeshComp();
-	Comp->SetMaterial(0, Material);
-}
-/*
-void AGameField::ChangeMaterial(FString F, TSubclassOf<AChessPiece>* S)
-{
-	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *("/Game/Materials/" + F)));
+// Assigning material function
 
-	UStaticMeshComponent* Comp = S->GetStatMeshComp(S);
+void AGameField::ChangeMaterial(AChessPiece* S, bool IsBlack)
+{
+	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, IsBlack ? *S->MaterialBlack: *S->MaterialWhite));
+	UStaticMeshComponent* Comp = S->GetStatMeshComp();
 	Comp->SetMaterial(0, Material);
 }
-*/
+
+
 TArray<ATile*>& AGameField::GetTileArray()
 {
 	return TileArray;

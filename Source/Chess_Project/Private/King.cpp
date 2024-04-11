@@ -24,8 +24,3 @@ void AKing::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
-UStaticMeshComponent* AKing::GetStatMeshComp()
-{
-	return StaticMeshComponent;
-}

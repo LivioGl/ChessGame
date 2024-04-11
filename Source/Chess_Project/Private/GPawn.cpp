@@ -12,6 +12,10 @@ AGPawn::AGPawn()
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
+
+	MaterialBlack = TEXT("/Game/Materials/MI_BlackPawn");
+	MaterialWhite = TEXT("/Game/Materials/MI_WhitePawn");
+
 }
 
 // Called when the game starts or when spawned
@@ -25,12 +29,6 @@ void AGPawn::BeginPlay()
 void AGPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-}
-
-UStaticMeshComponent* AGPawn::GetStatMeshComp()
-{
-	return StaticMeshComponent;
 
 }
 

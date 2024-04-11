@@ -7,7 +7,7 @@
 AKnight::AKnight()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
@@ -25,7 +25,7 @@ void AKnight::Tick(float DeltaTime)
 
 }
 
-UStaticMeshComponent* AKnight::GetStatMeshComp()
-{
-	return StaticMeshComponent;
-}
+//UStaticMeshComponent* AChessPiece::GetStatMeshComp()
+//{
+//	return StaticMeshComponent;
+//}

@@ -12,6 +12,8 @@ ARook::ARook()
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
+	MaterialBlack = TEXT("/Game/Materials/MI_BlackRook");
+	MaterialWhite = TEXT("/Game/Materials/MI_WhiteRook");
 
 }
 
@@ -27,9 +29,4 @@ void ARook::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
-
-UStaticMeshComponent* ARook::GetStatMeshComp()
-{
-	return StaticMeshComponent;
 }

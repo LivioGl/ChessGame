@@ -18,7 +18,20 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FVector2D PieceGridPosition;
-	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	USceneComponent* Scene;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UStaticMeshComponent* StaticMeshComponent;
+
+	UStaticMeshComponent* GetStatMeshComp();
+
+	FString MaterialWhite;
+	FString MaterialBlack;
+
+
+
 	FVector2D GetGridPosition();
 
 	void SetGridPosition(const double InX, const double InY);

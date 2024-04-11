@@ -73,7 +73,7 @@ public:
 	// Assign black or white color to a piece
 	void ChangeMaterialPawn(FString F, AGPawn* P); 
 	void ChangeMaterialBishop(FString F, ABishop* B);
-	void ChangeMaterial(FString F, TSubclassOf<AChessPiece>* S);
+	void ChangeMaterial(AChessPiece* S, bool IsBlack);
 
 	// return the array of tile pointers
 	TArray<ATile*>& GetTileArray();

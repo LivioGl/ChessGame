@@ -15,17 +15,17 @@ class CHESS_PROJECT_API AGPawn : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AGPawn();
-	UStaticMeshComponent* GetStatMeshComp();
+	//UStaticMeshComponent* GetStatMeshComp();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USceneComponent* Scene;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* StaticMeshComponent;
+	UStaticMeshComponent* StaticMeshComponent;*/
 
 public:	
 	// Called every frame
