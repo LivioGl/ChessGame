@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include "Knight.h"
+#include "Queen.h"
+#include "King.h"
 #include "Rook.h"
 #include "Bishop.h"
 #include "GPawn.h"
@@ -50,6 +53,15 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ARook> Rook;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AKing> King;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AQueen> Queen;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AKnight> Knight;
+
 	// tile size
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float TileSize;
@@ -71,8 +83,6 @@ public:
 	void SpawnPieces();
 
 	// Assign black or white color to a piece
-	void ChangeMaterialPawn(FString F, AGPawn* P); 
-	void ChangeMaterialBishop(FString F, ABishop* B);
 	void ChangeMaterial(AChessPiece* S, bool IsBlack);
 
 	// return the array of tile pointers

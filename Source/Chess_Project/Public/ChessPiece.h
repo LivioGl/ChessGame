@@ -30,8 +30,6 @@ public:
 	FString MaterialWhite;
 	FString MaterialBlack;
 
-
-
 	FVector2D GetGridPosition();
 
 	void SetGridPosition(const double InX, const double InY);

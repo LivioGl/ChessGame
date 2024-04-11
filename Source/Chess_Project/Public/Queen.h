@@ -16,8 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	AQueen();
 
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AChessPiece> Queen;
+	
 
 	//UStaticMeshComponent* GetStatMeshComp();
 
