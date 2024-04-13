@@ -31,10 +31,10 @@ class CHESS_PROJECT_API IPlayerInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	/*
+	
 	int32 PlayerNumber;
-	ESign Sign;
-
+	// ESign Sign;
+	/*
 	virtual void OnTurn() {};
 	virtual void OnWin() {};
 	virtual void OnLose() {};

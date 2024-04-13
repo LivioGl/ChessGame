@@ -32,6 +32,9 @@ public:
 
 	static const int32 NOT_ASSIGNED = -1; // Capire a cosa serve
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	float NormalizedCellPadding;
+
 	// size of field
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;

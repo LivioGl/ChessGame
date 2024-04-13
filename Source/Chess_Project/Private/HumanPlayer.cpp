@@ -8,17 +8,17 @@
 AHumanPlayer::AHumanPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	// PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	// Set this pawn to be controlled by the lowest-numbered player (Human)
-	// AutoPossessPlayer = EAutoReceiveInput::Player0;
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
 	// create a camera component
-	//Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	//set the camera as RootComponent
-	// SetRootComponent(Camera);
+	SetRootComponent(Camera);
 	// get the game instance reference
-	//GameInstance = Cast<UTTT_GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	// default init values
-	//PlayerNumber = -1;
+	PlayerNumber = -1;
 	//Sign = ESign::E;
 }
 
