@@ -8,7 +8,7 @@ ARandomPlayer::ARandomPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
 // Called when the game starts or when spawned
@@ -31,4 +31,22 @@ void ARandomPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+//void ARandomPlayer::OnTurn()
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Tocca al Bot!"));
+//	FTimerHandle TimerHandle;
+//
+//	// GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]() {});
+//}
+//
+//void ARandomPlayer::OnWin()
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha vinto!"));
+//}
+//
+//void ARandomPlayer::OnLose()
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha perso!"));
+//}
 

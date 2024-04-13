@@ -3,6 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PlayerInterface.h"
+#include "MainGameInstance.h"
+#include "MainGameMode.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/Pawn.h"
 #include "RandomPlayer.generated.h"
 
@@ -14,6 +18,7 @@ class CHESS_PROJECT_API ARandomPlayer : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ARandomPlayer();
+	UMainGameInstance* GameInstance;
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,5 +30,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	/*virtual void OnTurn() override;
+	virtual void OnWin() override;
+	virtual void OnLose() override;*/
 };
