@@ -17,6 +17,19 @@ ARook::ARook()
 
 }
 
+TArray<ATile*> ARook::RookValidMoves()
+{
+	// FVector RookPossibleMoves = AGameField::GetRelativeLocationByXYPosition(x, y)
+	// new possible positions : starting from(x, y), rook can move to :
+	// 0 < i < 8
+	// (x, y-i), (x, y+i), (x-i, y), (x+i, y)
+	// In the same positions, pieces, if present, can be captured.
+	// GetTileStatus
+	// Move to TileGridPosition
+	// Get pointer to Tiles which represent a legal move
+	return TArray<ATile*>();
+}
+
 // Called when the game starts or when spawned
 void ARook::BeginPlay()
 {

@@ -16,6 +16,20 @@ ABishop::ABishop()
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
 }
 
+TArray<ATile*> ABishop::BishopValidMoves()
+{
+	// FVector BishopPossibleMoves = AGameField::GetRelativeLocationByXYPosition(x, y);
+	// New possible positions: starting from (x, y), with Bishop I can move to:
+	// (x+i, y+i), (x+i, y-i), (x-i, y-i), (x-i, y+i)
+	// In the same positions, pieces, if present, can be captured.
+	// GetTileStatus
+	// Move to TileGridPosition
+	// Get pointer to Tiles which represent a legal move
+
+
+	return TArray<ATile*>();
+}
+
 // Called when the game starts or when spawned
 void ABishop::BeginPlay()
 {

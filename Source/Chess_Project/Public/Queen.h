@@ -15,7 +15,7 @@ class CHESS_PROJECT_API AQueen : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AQueen();
-
+	TArray<ATile*> QueenValidMoves();
 	
 
 	//UStaticMeshComponent* GetStatMeshComp();

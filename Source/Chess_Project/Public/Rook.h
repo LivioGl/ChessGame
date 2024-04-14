@@ -15,7 +15,7 @@ class CHESS_PROJECT_API ARook : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ARook();
-	UStaticMeshComponent* GetStatMeshComp();
+	TArray<ATile*> RookValidMoves();
 
 protected:
 	// Called when the game starts or when spawned

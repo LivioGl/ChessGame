@@ -17,6 +17,19 @@ AKing::AKing()
 
 }
 
+TArray<ATile*> AKing::KingValidMoves()
+{
+	// FVector KingCurrentPosition = AGameField::GetRelativeLocationByXYPosition(x, y)
+	// new possible positions: starting from (x, y), king can move to:
+	// const int i = 1
+	// (x, y+i), (x+i, y+i), (x+i, y), (x+i, y-i), (x, y-i), (x-i, y-i), (x-i, y), (x-i, y+i)
+	// // In the same positions, pieces, if present, can be captured.
+	// GetTileStatus
+	// Move to TileGridPosition
+	// Get pointer to Tiles which represent a legal move
+	return TArray<ATile*>();
+}
+
 // Called when the game starts or when spawned
 void AKing::BeginPlay()
 {

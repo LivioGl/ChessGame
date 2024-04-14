@@ -124,6 +124,7 @@ void AGameField::SpawnPieces()
 		Rook1->SetGridPosition(0, b);
 		ChangeMaterial(Rook1, false);
 	}
+
 	// Spawning Black Rooks
 	for (int32 b = 0; b < 9; b += 7)
 	{
@@ -136,51 +137,55 @@ void AGameField::SpawnPieces()
 		ChangeMaterial(Rook2, true);
 	}
 	// Spawning White King
-	FVector Location1 = AGameField::GetRelativeLocationByXYPosition(0, 4);
+	FVector WhiteKingLocation = AGameField::GetRelativeLocationByXYPosition(0, 4);
 	AKing* King1;
-	King1 = GetWorld()->SpawnActor<AKing>(King, Location1, FRotator::ZeroRotator);
+	King1 = GetWorld()->SpawnActor<AKing>(King, WhiteKingLocation, FRotator::ZeroRotator);
 	const float PieceScale = PieceSize / 100;
 	King1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	King1->SetGridPosition(0, 4);
 	ChangeMaterial(King1, false);
+
 	// Spawning Black King
-	FVector Location2 = AGameField::GetRelativeLocationByXYPosition(7, 4);
+	FVector BlackKingLocation = AGameField::GetRelativeLocationByXYPosition(7, 4);
 	AKing* King2;
-	King2 = GetWorld()->SpawnActor<AKing>(King, Location2, FRotator::ZeroRotator);
+	King2 = GetWorld()->SpawnActor<AKing>(King, BlackKingLocation, FRotator::ZeroRotator);
 	King2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	King2->SetGridPosition(7, 4);
 	ChangeMaterial(King2, true);
 	
 	// Spawning White Queen
-	FVector Location3 = AGameField::GetRelativeLocationByXYPosition(0, 3);
+	FVector WhiteQueenLocation = AGameField::GetRelativeLocationByXYPosition(0, 3);
 	AQueen* Queen1;
-	Queen1 = GetWorld()->SpawnActor<AQueen>(Queen, Location3, FRotator::ZeroRotator);
+	Queen1 = GetWorld()->SpawnActor<AQueen>(Queen, WhiteQueenLocation, FRotator::ZeroRotator);
 	Queen1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	Queen1->SetGridPosition(0, 3);
 	ChangeMaterial(Queen1, false);
+
 	// Spawning Black Queen
-	FVector Location4 = AGameField::GetRelativeLocationByXYPosition(7, 3);
+	FVector BlackQueenLocation = AGameField::GetRelativeLocationByXYPosition(7, 3);
 	AQueen* Queen2;
-	Queen2 = GetWorld()->SpawnActor<AQueen>(Queen, Location4, FRotator::ZeroRotator);
+	Queen2 = GetWorld()->SpawnActor<AQueen>(Queen, BlackQueenLocation, FRotator::ZeroRotator);
 	Queen2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	Queen2->SetGridPosition(7, 3);
 	ChangeMaterial(Queen2, true);
+
 	// Spawning White Knights
 	for (int32 b = 1; b < 7; b += 5)
 	{
-		FVector Location5 = AGameField::GetRelativeLocationByXYPosition(0, b);
+		FVector WhiteKnightsLocation = AGameField::GetRelativeLocationByXYPosition(0, b);
 		AKnight* Knight1;
-		Knight1 = GetWorld()->SpawnActor<AKnight>(Knight, Location5, FRotator::ZeroRotator);
+		Knight1 = GetWorld()->SpawnActor<AKnight>(Knight, WhiteKnightsLocation, FRotator::ZeroRotator);
 		Knight1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		Knight1->SetGridPosition(0, b);
 		ChangeMaterial(Knight1, false);
 	}
+
 	// Spawning Black Knights
 	for (int32 b = 1; b < 7; b += 5)
 	{
-		FVector Location6 = AGameField::GetRelativeLocationByXYPosition(7, b);
+		FVector BlackKnightsLocation = AGameField::GetRelativeLocationByXYPosition(7, b);
 		AKnight* Knight2;
-		Knight2 = GetWorld()->SpawnActor<AKnight>(Knight, Location6, FRotator::ZeroRotator);
+		Knight2 = GetWorld()->SpawnActor<AKnight>(Knight, BlackKnightsLocation, FRotator::ZeroRotator);
 		Knight2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		Knight2->SetGridPosition(7, b);
 		ChangeMaterial(Knight2, true);

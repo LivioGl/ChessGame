@@ -18,6 +18,19 @@ AGPawn::AGPawn()
 
 }
 
+TArray<ATile*> AGPawn::PawnValidMoves()
+{
+	// FVector PawnPossibleMoves = AGameField::GetRelativeLocationByXYPosition(x, y)
+	// new possible positions: starting from (x, y), pawn can move to:
+	// (x, y+i), with i = 1 or i = 2
+	// if in (x+i, y+i) or (x-i, y+i) there's a piece, it can be captured by the pawn
+	// GetTileStatus
+	// Move to TileGridPosition
+	// Get pointer to Tiles which represent a legal move
+
+	return TArray<ATile*>();
+}
+
 // Called when the game starts or when spawned
 void AGPawn::BeginPlay()
 {

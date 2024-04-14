@@ -15,6 +15,7 @@ class CHESS_PROJECT_API AKnight : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AKnight();
+	TArray<ATile*> KnightValidMoves();
 
 protected:
 	// Called when the game starts or when spawned

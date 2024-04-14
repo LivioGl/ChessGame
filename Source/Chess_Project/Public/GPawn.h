@@ -15,6 +15,7 @@ class CHESS_PROJECT_API AGPawn : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AGPawn();
+	TArray<ATile*> PawnValidMoves();
 
 protected:
 	// Called when the game starts or when spawned
