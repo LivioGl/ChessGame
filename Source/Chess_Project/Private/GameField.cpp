@@ -73,122 +73,134 @@ void AGameField::SpawnPieces()
 	for (int32 b = 0; b < 8; b++)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(1, b);
-		AGPawn* Pawn;
-		Pawn = GetWorld()->SpawnActor<AGPawn>(GPawn, Location, FRotator::ZeroRotator);
+		AGPawn* WhitePawn;
+		WhitePawn = GetWorld()->SpawnActor<AGPawn>(GPawn, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
-		Pawn->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		Pawn->SetGridPosition(1, b);
-		ChangeMaterial(Pawn, false);
+		WhitePawn->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		WhitePawn->SetGridPosition(1, b);
+		ChangeMaterial(WhitePawn, false);
 	}
 	// Spawning Black Pawns
 	for (int32 b = 0; b < 8; b++)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(6, b);
-		AGPawn* Pawn;
-		Pawn = GetWorld()->SpawnActor<AGPawn>(GPawn, Location, FRotator::ZeroRotator);
+		AGPawn* BlackPawn;
+		BlackPawn = GetWorld()->SpawnActor<AGPawn>(GPawn, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
-		Pawn->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		Pawn->SetGridPosition(6, b);
-		ChangeMaterial(Pawn, true);
+		BlackPawn->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		BlackPawn->SetGridPosition(6, b);
+		// Setting team to AI team
+		BlackPawn->HumanTeam = false;
+		ChangeMaterial(BlackPawn, true);
 	}
 	// Spawning White Bishops
 	for (int32 b = 2; b < 6; b+=3)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(0, b);
-		ABishop* PBishop;
-		PBishop = GetWorld()->SpawnActor<ABishop>(Bishop, Location, FRotator::ZeroRotator);
+		ABishop* WhiteBishop;
+		WhiteBishop = GetWorld()->SpawnActor<ABishop>(Bishop, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
-		PBishop->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		PBishop->SetGridPosition(0, b);
-		ChangeMaterial(PBishop, false);
+		WhiteBishop->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		WhiteBishop->SetGridPosition(0, b);
+		ChangeMaterial(WhiteBishop, false);
 	}
 	// Spawning Black Bishops
 	for (int32 b = 2; b < 6; b += 3)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(7, b);
-		ABishop* PBishop;
-		PBishop = GetWorld()->SpawnActor<ABishop>(Bishop, Location, FRotator::ZeroRotator);
+		ABishop* BlackBishop;
+		BlackBishop = GetWorld()->SpawnActor<ABishop>(Bishop, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
-		PBishop->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		PBishop->SetGridPosition(7, b);
-		ChangeMaterial(PBishop, true);
+		BlackBishop->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		BlackBishop->SetGridPosition(7, b);
+		// Setting team to AI team
+		BlackBishop->HumanTeam = false;
+		ChangeMaterial(BlackBishop, true);
 	}
 	// Spawning White Rooks
 	for (int32 b = 0; b < 9; b += 7)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(0, b);
-		ARook* Rook1;
-		Rook1 = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
+		ARook* WhiteRook;
+		WhiteRook = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
-		Rook1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		Rook1->SetGridPosition(0, b);
-		ChangeMaterial(Rook1, false);
+		WhiteRook->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		WhiteRook->SetGridPosition(0, b);
+		ChangeMaterial(WhiteRook, false);
 	}
 
 	// Spawning Black Rooks
 	for (int32 b = 0; b < 9; b += 7)
 	{
 		FVector Location = AGameField::GetRelativeLocationByXYPosition(7, b);
-		ARook* Rook2;
-		Rook2 = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
+		ARook* BlackRook;
+		BlackRook = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
-		Rook2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		Rook2->SetGridPosition(0, b);
-		ChangeMaterial(Rook2, true);
+		BlackRook->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		BlackRook->SetGridPosition(0, b);
+		// Setting team to AI team
+		BlackRook->HumanTeam = false;
+		ChangeMaterial(BlackRook, true);
 	}
 	// Spawning White King
 	FVector WhiteKingLocation = AGameField::GetRelativeLocationByXYPosition(0, 4);
-	AKing* King1;
-	King1 = GetWorld()->SpawnActor<AKing>(King, WhiteKingLocation, FRotator::ZeroRotator);
+	AKing* WhiteKing;
+	WhiteKing = GetWorld()->SpawnActor<AKing>(King, WhiteKingLocation, FRotator::ZeroRotator);
 	const float PieceScale = PieceSize / 100;
-	King1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-	King1->SetGridPosition(0, 4);
-	ChangeMaterial(King1, false);
+	WhiteKing->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+	WhiteKing->SetGridPosition(0, 4);
+	ChangeMaterial(WhiteKing, false);
 
 	// Spawning Black King
 	FVector BlackKingLocation = AGameField::GetRelativeLocationByXYPosition(7, 4);
-	AKing* King2;
-	King2 = GetWorld()->SpawnActor<AKing>(King, BlackKingLocation, FRotator::ZeroRotator);
-	King2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-	King2->SetGridPosition(7, 4);
-	ChangeMaterial(King2, true);
+	AKing* BlackKing;
+	BlackKing = GetWorld()->SpawnActor<AKing>(King, BlackKingLocation, FRotator::ZeroRotator);
+	BlackKing->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+	BlackKing->SetGridPosition(7, 4);
+	// Setting team to AI team
+	BlackKing->HumanTeam = false;
+	ChangeMaterial(BlackKing, true);
 	
 	// Spawning White Queen
 	FVector WhiteQueenLocation = AGameField::GetRelativeLocationByXYPosition(0, 3);
-	AQueen* Queen1;
-	Queen1 = GetWorld()->SpawnActor<AQueen>(Queen, WhiteQueenLocation, FRotator::ZeroRotator);
-	Queen1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-	Queen1->SetGridPosition(0, 3);
-	ChangeMaterial(Queen1, false);
+	AQueen* WhiteQueen;
+	WhiteQueen = GetWorld()->SpawnActor<AQueen>(Queen, WhiteQueenLocation, FRotator::ZeroRotator);
+	WhiteQueen->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+	WhiteQueen->SetGridPosition(0, 3);
+	ChangeMaterial(WhiteQueen, false);
 
 	// Spawning Black Queen
 	FVector BlackQueenLocation = AGameField::GetRelativeLocationByXYPosition(7, 3);
-	AQueen* Queen2;
-	Queen2 = GetWorld()->SpawnActor<AQueen>(Queen, BlackQueenLocation, FRotator::ZeroRotator);
-	Queen2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-	Queen2->SetGridPosition(7, 3);
-	ChangeMaterial(Queen2, true);
+	AQueen* BlackQueen;
+	BlackQueen = GetWorld()->SpawnActor<AQueen>(Queen, BlackQueenLocation, FRotator::ZeroRotator);
+	BlackQueen->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+	BlackQueen->SetGridPosition(7, 3);
+	// Setting team to AI team
+	BlackQueen->HumanTeam = false;
+	ChangeMaterial(BlackQueen, true);
 
 	// Spawning White Knights
 	for (int32 b = 1; b < 7; b += 5)
 	{
 		FVector WhiteKnightsLocation = AGameField::GetRelativeLocationByXYPosition(0, b);
-		AKnight* Knight1;
-		Knight1 = GetWorld()->SpawnActor<AKnight>(Knight, WhiteKnightsLocation, FRotator::ZeroRotator);
-		Knight1->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		Knight1->SetGridPosition(0, b);
-		ChangeMaterial(Knight1, false);
+		AKnight* WhiteKnight;
+		WhiteKnight = GetWorld()->SpawnActor<AKnight>(Knight, WhiteKnightsLocation, FRotator::ZeroRotator);
+		WhiteKnight->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		WhiteKnight->SetGridPosition(0, b);
+		ChangeMaterial(WhiteKnight, false);
 	}
 
 	// Spawning Black Knights
 	for (int32 b = 1; b < 7; b += 5)
 	{
 		FVector BlackKnightsLocation = AGameField::GetRelativeLocationByXYPosition(7, b);
-		AKnight* Knight2;
-		Knight2 = GetWorld()->SpawnActor<AKnight>(Knight, BlackKnightsLocation, FRotator::ZeroRotator);
-		Knight2->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		Knight2->SetGridPosition(7, b);
-		ChangeMaterial(Knight2, true);
+		AKnight* BlackKnight;
+		BlackKnight = GetWorld()->SpawnActor<AKnight>(Knight, BlackKnightsLocation, FRotator::ZeroRotator);
+		BlackKnight->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
+		BlackKnight->SetGridPosition(7, b);
+		// Setting team to AI team
+		BlackKnight->HumanTeam = false;
+		ChangeMaterial(BlackKnight, true);
 	}
 }
 

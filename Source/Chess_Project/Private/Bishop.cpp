@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Bishop.h"
+#include "MainGameMode.h"
 
 // Sets default values
 ABishop::ABishop()
@@ -18,8 +17,11 @@ ABishop::ABishop()
 
 TArray<ATile*> ABishop::BishopValidMoves()
 {
-	// FVector BishopPossibleMoves = AGameField::GetRelativeLocationByXYPosition(x, y);
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	AGameField* Field = GameMode->Field;
+	FVector BishopCurrentPosition = Field->GetRelativeLocationByXYPosition(PieceGridPosition.X, PieceGridPosition.Y);
 	// New possible positions: starting from (x, y), with Bishop I can move to:
+	// 0 < i < 8
 	// (x+i, y+i), (x+i, y-i), (x-i, y-i), (x-i, y+i)
 	// In the same positions, pieces, if present, can be captured.
 	// GetTileStatus

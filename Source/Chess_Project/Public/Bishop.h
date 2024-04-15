@@ -5,6 +5,8 @@
 #include "GameFramework/Actor.h"
 #include "Bishop.generated.h"
 
+class AGameField;
+
 UCLASS()
 class CHESS_PROJECT_API ABishop : public AChessPiece
 {
@@ -14,6 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	ABishop();
 	TArray<ATile*> BishopValidMoves();
+
 	
 
 protected:

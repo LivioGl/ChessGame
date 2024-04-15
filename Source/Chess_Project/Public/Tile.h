@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Tile.generated.h"
 
-// Gestione delle caselle (provvisorio)
+// Gestione delle caselle
 UENUM()
 enum class ETileStatus : uint8
 {

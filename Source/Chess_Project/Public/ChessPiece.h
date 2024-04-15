@@ -16,6 +16,8 @@ public:
 	// Sets default values for this actor's properties
 	AChessPiece();
 
+	bool HumanTeam = true;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FVector2D PieceGridPosition;
 
@@ -31,7 +33,7 @@ public:
 	FString MaterialBlack;
 
 	FVector2D GetGridPosition();
-
+	
 	void SetGridPosition(const double InX, const double InY);
 
 protected:
