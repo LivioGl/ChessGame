@@ -7,12 +7,16 @@
 #include "Tile.generated.h"
 
 // Gestione delle caselle
+
 UENUM()
 enum class ETileStatus : uint8
 {
 	EMPTY	UMETA(DisplayName = "Empty"),
 	OCCUPIED	UMETA(DisplayName = "Occupied"),
 };
+
+// Extern class used for generic tile position getter
+extern class AChessPiece;
 
 UCLASS()
 class CHESS_PROJECT_API ATile : public AActor
@@ -32,6 +36,9 @@ public:
 	// get the tile owner
 	int32 GetOwner();
 
+	// get the piece type in a specific tile
+	AChessPiece* GetChessPiece();
+
 	// set the (x, y) position
 	void SetGridPosition(const double InX, const double InY);
 
@@ -43,6 +50,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	// Pointer to piece actually occupying this tile 
+	AChessPiece* Piece = nullptr;
 
 	// Componente scena
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")

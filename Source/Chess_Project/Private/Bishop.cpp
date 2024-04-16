@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Bishop.h"
+//#include "GameField.h"
 #include "MainGameMode.h"
+
 
 // Sets default values
 ABishop::ABishop()
@@ -15,11 +17,30 @@ ABishop::ABishop()
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
 }
 
-TArray<ATile*> ABishop::BishopValidMoves()
+void ABishop::BishopValidMoves(TArray<ATile*>& Moves)
 {
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
-	FVector BishopCurrentPosition = Field->GetRelativeLocationByXYPosition(PieceGridPosition.X, PieceGridPosition.Y);
+	FVector2D BishopCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
+	// Current Bishop position saved in this pointer
+	ATile* CurrentPosition = Field->TileMap[(BishopCurrentPosition)];
+
+	FVector2D BMovements[4];
+	BMovements[0] = FVector2D(1, 1);
+	BMovements[1] = FVector2D(-1, 1);
+	BMovements[2] = FVector2D(-1, -1);
+	BMovements[3] = FVector2D(1, -1);
+	for (int i = 0; i < 4; i++)
+	{
+		while (auto NewTiles = Field->TileMap[(BishopCurrentPosition + BMovements[i])])
+		{
+			// Check th
+			if ((NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			{
+
+			}
+		}
+	}
 	// New possible positions: starting from (x, y), with Bishop I can move to:
 	// 0 < i < 8
 	// (x+i, y+i), (x+i, y-i), (x-i, y-i), (x-i, y+i)
@@ -27,9 +48,6 @@ TArray<ATile*> ABishop::BishopValidMoves()
 	// GetTileStatus
 	// Move to TileGridPosition
 	// Get pointer to Tiles which represent a legal move
-
-
-	return TArray<ATile*>();
 }
 
 // Called when the game starts or when spawned

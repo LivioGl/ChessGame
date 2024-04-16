@@ -28,6 +28,7 @@ void AMainGameMode::TurnNextPlayer()
 
 }
 
+
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();

@@ -54,6 +54,7 @@ public:
 	// Called at the end of the game turn
 	void TurnNextPlayer();
 
+
 	
 protected:
 	// Called when the game starts or when spawned

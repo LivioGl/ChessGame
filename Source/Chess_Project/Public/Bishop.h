@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "ChessPiece.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -15,9 +16,7 @@ class CHESS_PROJECT_API ABishop : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ABishop();
-	TArray<ATile*> BishopValidMoves();
-
-	
+	void BishopValidMoves(TArray<ATile*>& Moves);
 
 protected:
 	// Called when the game starts or when spawned

@@ -39,6 +39,11 @@ int32 ATile::GetOwner()
 	return PlayerOwner;
 }
 
+AChessPiece* ATile::GetChessPiece()
+{
+	return Piece;
+}
+
 void ATile::SetGridPosition(const double InX, const double InY)
 {
 	TileGridPosition.Set(InX, InY);
