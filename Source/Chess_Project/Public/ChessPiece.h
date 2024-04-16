@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "ChessMove.h"
 #include "Tile.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"

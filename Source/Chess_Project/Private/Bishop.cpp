@@ -34,10 +34,11 @@ void ABishop::BishopValidMoves(TArray<ATile*>& Moves)
 	{
 		while (auto NewTiles = Field->TileMap[(BishopCurrentPosition + BMovements[i])])
 		{
-			// Check th
+			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
 			if ((NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
 			{
-
+				ChessMove BishopSingleMove(this, BishopCurrentPosition, BishopCurrentPosition+BMovements[i]);
+				GameMode->ValidMoves.Add(BishopSingleMove);
 			}
 		}
 	}

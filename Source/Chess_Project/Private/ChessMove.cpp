@@ -3,10 +3,20 @@
 
 #include "ChessMove.h"
 
-ChessMove::ChessMove()
+ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final)
 {
+	MovedChessPiece = Piece;
+	Initial = Start;
+	Final = End;
 }
 
-ChessMove::~ChessMove()
+ChessMove::ChessMove()
 {
+	ChessMove Move;
 }
+
+//bool ChessMove::operator==(const ChessMove& other) const
+//{
+//    return false;
+//}
+

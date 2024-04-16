@@ -3,6 +3,7 @@
 
 #include "MainGameMode.h"
 #include "PlayerController_Chess.h"
+#include "ChessMove.h"
 #include "HumanPlayer.h"
 #include "RandomPlayer.h"
 #include "GPawn.h"
@@ -46,10 +47,18 @@ void AMainGameMode::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("GFieldClass null"));
 	}
-	FVector Pippo = Field->GetActorLocation() + FVector(500, 500, 1000);
+	FVector CameraPosition = Field->GetActorLocation() + FVector(500, 500, 1000);
 	//float CameraPosX = ((Field->TileSize * (FieldSize + ((FieldSize - 1) * Field->NormalizedCellPadding) - (FieldSize - 1))) / 2) - (Field->TileSize / 2);
 	// FVector CameraPos(CameraPosX, CameraPosX, 1000.0f);
-	HumanPlayer->SetActorLocationAndRotation(Pippo, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
+	HumanPlayer->SetActorLocationAndRotation(CameraPosition, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
+
+
+	// 
+	// La telecamera può stare in una posizione statica?
+	// Gestione del ChessMove e interazione con MainGameMode
+
+
+
 }
 
 

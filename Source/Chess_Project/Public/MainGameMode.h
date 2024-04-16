@@ -54,6 +54,7 @@ public:
 	// Called at the end of the game turn
 	void TurnNextPlayer();
 
+	TArray<ChessMove> ValidMoves;
 
 	
 protected:
