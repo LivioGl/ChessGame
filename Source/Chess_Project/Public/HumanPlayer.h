@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
+#include "MainGameMode.h"
+#include "Tile.h"
 #include "CoreMinimal.h"
 #include "MainGameInstance.h"
 #include "PlayerInterface.h"
@@ -38,11 +40,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	/*
-	virtual void OnTurn() override;
+	
+	/*virtual void OnTurn() override;
 	virtual void OnWin() override;
-	virtual void OnLose() override;
-	*/
+	virtual void OnLose() override;*/
 	// called on left mouse click (binding)
 	UFUNCTION()
 	void OnClick();

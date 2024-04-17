@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "ChessMove.h"
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 #include "PlayerInterface.generated.h"

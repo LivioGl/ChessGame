@@ -55,7 +55,6 @@ void AMainGameMode::BeginPlay()
 
 	// 
 	// La telecamera può stare in una posizione statica?
-	// Gestione del ChessMove e interazione con MainGameMode
 
 
 

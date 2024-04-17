@@ -19,12 +19,13 @@ ABishop::ABishop()
 
 void ABishop::BishopValidMoves(TArray<ATile*>& Moves)
 {
+	// Gamemode reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
-	FVector2D BishopCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
 	// Current Bishop position saved in this pointer
+	FVector2D BishopCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
 	ATile* CurrentPosition = Field->TileMap[(BishopCurrentPosition)];
-
+	// Directions of possible moves
 	FVector2D BMovements[4];
 	BMovements[0] = FVector2D(1, 1);
 	BMovements[1] = FVector2D(-1, 1);
@@ -37,18 +38,17 @@ void ABishop::BishopValidMoves(TArray<ATile*>& Moves)
 			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
 			if ((NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
 			{
+				// Save the move in a gamemode array
 				ChessMove BishopSingleMove(this, BishopCurrentPosition, BishopCurrentPosition+BMovements[i]);
 				GameMode->ValidMoves.Add(BishopSingleMove);
 			}
+			if ((NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
+			// Cycle to cover all the chess board
+			BMovements[i].X > 0 ? BMovements[i].X += 1 : BMovements[i].X -= 1;
+			BMovements[i].Y > 0 ? BMovements[i].Y += 1 : BMovements[i].Y -= 1;
 		}
 	}
-	// New possible positions: starting from (x, y), with Bishop I can move to:
-	// 0 < i < 8
-	// (x+i, y+i), (x+i, y-i), (x-i, y-i), (x-i, y+i)
-	// In the same positions, pieces, if present, can be captured.
-	// GetTileStatus
-	// Move to TileGridPosition
-	// Get pointer to Tiles which represent a legal move
+
 }
 
 // Called when the game starts or when spawned

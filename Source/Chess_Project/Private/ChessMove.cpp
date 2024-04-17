@@ -3,17 +3,32 @@
 
 #include "ChessMove.h"
 
+ChessMove::ChessMove()
+{
+	MovedChessPiece = nullptr;
+	Start = FVector2D(0, 0);
+	End = FVector2D(0, 0);
+	CapturedChessPiece = nullptr;
+
+}
+
 ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final)
 {
-	MovedChessPiece = Piece;
+	Piece = MovedChessPiece;
 	Initial = Start;
 	Final = End;
 }
 
-ChessMove::ChessMove()
+ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured)
 {
-	ChessMove Move;
+	Piece = MovedChessPiece;
+	Initial = Start;
+	Final = End;
+	Captured = CapturedChessPiece;
+
+
 }
+
 
 //bool ChessMove::operator==(const ChessMove& other) const
 //{

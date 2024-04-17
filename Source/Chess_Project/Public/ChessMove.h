@@ -5,6 +5,7 @@
 #include "ChessPiece.h"
 #include "CoreMinimal.h"
 
+extern class AChessPiece;
 /**
  * 
  */
@@ -17,10 +18,11 @@ public:
 	// Pointer to captured piece
 	AChessPiece* CapturedChessPiece = nullptr;
 
-	ChessMove(AChessPiece* Piece, FVector2D Start, FVector2D End);
+	ChessMove();
+	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final);
+	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured);
 
 	
-	ChessMove();
 	//bool operator==(const ChessMove& other) const;
 
 };
