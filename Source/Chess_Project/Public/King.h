@@ -16,7 +16,7 @@ class CHESS_PROJECT_API AKing : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AKing();
-	TArray<ATile*> KingValidMoves();
+	void ValidMoves() override;
 
 protected:
 	// Called when the game starts or when spawned

@@ -18,18 +18,11 @@ AQueen::AQueen()
 
 }
 
-TArray<ATile*> AQueen::QueenValidMoves()
+void AQueen::ValidMoves()
 {
-	// FVector PawnPossibleMoves = AGameField::GetRelativeLocationByXYPosition(x, y)
-	// new possible positions : starting from(x, y), queen can move to :
-	// 0 < i < 8
-	// (x-i, y-i), (x-i, y+i), (x+i, y+i), (x+i, y-i), (x, y-i), (x, y+i), (x-i, y), (x+i, y)
-	// 
-	// GetTileStatus
-	// Move to TileGridPosition
-	// Get pointer to Tiles which represent a legal move
-	return TArray<ATile*>();
+
 }
+
 
 // Called when the game starts or when spawned
 void AQueen::BeginPlay()
@@ -44,8 +37,3 @@ void AQueen::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
-//UStaticMeshComponent* AQueen::GetStatMeshComp()
-//{
-//	return StaticMeshComponent;
-//}

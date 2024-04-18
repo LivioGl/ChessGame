@@ -23,6 +23,6 @@ public:
 	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured);
 
 	
-	//bool operator==(const ChessMove& other) const;
+	bool operator==(const ChessMove& Other) const;
 
 };

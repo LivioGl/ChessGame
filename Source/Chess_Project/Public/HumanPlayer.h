@@ -47,5 +47,6 @@ public:
 	// called on left mouse click (binding)
 	UFUNCTION()
 	void OnClick();
+	FString MoveHint;
 
 };

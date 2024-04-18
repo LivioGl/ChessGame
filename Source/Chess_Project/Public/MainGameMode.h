@@ -55,7 +55,6 @@ public:
 	void TurnNextPlayer();
 
 	TArray<ChessMove> ValidMoves;
-
 	
 protected:
 	// Called when the game starts or when spawned

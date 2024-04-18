@@ -16,7 +16,7 @@ class CHESS_PROJECT_API ABishop : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ABishop();
-	void BishopValidMoves(TArray<ATile*>& Moves);
+	void ValidMoves() override;
 
 protected:
 	// Called when the game starts or when spawned

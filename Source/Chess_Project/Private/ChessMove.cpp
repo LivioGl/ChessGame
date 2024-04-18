@@ -29,9 +29,8 @@ ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, ACh
 
 }
 
-
-//bool ChessMove::operator==(const ChessMove& other) const
-//{
-//    return false;
-//}
+bool ChessMove::operator==(const ChessMove& Other) const
+{
+	return (MovedChessPiece == Other.MovedChessPiece && Start == Other.Start && End == Other.End && CapturedChessPiece == Other.CapturedChessPiece);
+}
 

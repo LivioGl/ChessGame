@@ -15,20 +15,11 @@ class CHESS_PROJECT_API AQueen : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AQueen();
-	TArray<ATile*> QueenValidMoves();
-	
-
-	//UStaticMeshComponent* GetStatMeshComp();
+	void ValidMoves() override;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	USceneComponent* Scene;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* StaticMeshComponent;*/
 
 public:	
 	// Called every frame

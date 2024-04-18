@@ -17,9 +17,9 @@ ABishop::ABishop()
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
 }
 
-void ABishop::BishopValidMoves(TArray<ATile*>& Moves)
+void ABishop::ValidMoves()
 {
-	// Gamemode reference
+	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
 	// Current Bishop position saved in this pointer

@@ -8,11 +8,7 @@ AChessPiece::AChessPiece()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	/*Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
-	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
-	SetRootComponent(Scene);
-	StaticMeshComponent->SetupAttachment(Scene);*/
-
+	MoveHint = TEXT("/Game/Materials/MoveHint");
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +25,11 @@ void AChessPiece::Tick(float DeltaTime)
 
 }
 
+
+void AChessPiece::ValidMoves()
+{
+
+}
 
 FVector2D AChessPiece::GetGridPosition()
 {
