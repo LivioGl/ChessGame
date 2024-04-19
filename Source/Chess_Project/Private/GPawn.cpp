@@ -18,38 +18,37 @@ AGPawn::AGPawn()
 
 }
 
-void AGPawn::ValidMoves()
+void AGPawn::GetValidMoves()
 {
 	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
 	// Current Pawn position saved in this pointer
-	FVector2D PawnCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
 	
-	ATile* NewTile;
+	ATile** NewTile;
 	// Checking the (x, y+1) tile
-	NewTile = Field->TileMap[(PawnCurrentPosition)+FVector2D(0, HumanTeam ? 1 : -1)];
-	if (NewTile && NewTile->GetTileStatus() == ETileStatus::EMPTY)
+	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(HumanTeam ? 1 : -1, 0));
+	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::EMPTY)
 	{
-		GameMode->ValidMoves.Add(ChessMove(this, PawnCurrentPosition, NewTile->GetGridPosition()));
+		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition()));
 	}
 	// Checking the (x, y+2) tile
-	NewTile = Field->TileMap[(PawnCurrentPosition)+FVector2D(0, HumanTeam ? 2 : -2)];
-	if (NewTile && NewTile->GetTileStatus() == ETileStatus::EMPTY && this->GetGridPosition().Y == (HumanTeam ? 1 : 6))
+	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(HumanTeam ? 2 : -2, 0));
+	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::EMPTY && this->GetGridPosition().X == (HumanTeam ? 1 : 6))
 	{
-		GameMode->ValidMoves.Add(ChessMove(this, PawnCurrentPosition, NewTile->GetGridPosition()));
+		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition()));
 	}
 	// Checking the (x+1, y+1) tile, for capturing enemy pieces
-	NewTile = Field->TileMap[(PawnCurrentPosition)+FVector2D(HumanTeam ? 1 : -1, HumanTeam ? 1 : -1)];
-	if (NewTile && NewTile->GetTileStatus() == ETileStatus::OCCUPIED && NewTile->GetChessPiece()->HumanTeam != this->HumanTeam)
+	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(HumanTeam ? 1 : -1, 1));
+	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::OCCUPIED && (*NewTile)->GetChessPiece()->HumanTeam != this->HumanTeam)
 	{
-		GameMode->ValidMoves.Add(ChessMove(this, PawnCurrentPosition, NewTile->GetGridPosition()));
+		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition()));
 	}
 	// Checking the (x-1, y+1) tile, for capturing enemy pieces
-	NewTile = Field->TileMap[(PawnCurrentPosition)+FVector2D(HumanTeam ? -1 : 1, HumanTeam ? 1 : -1)];
-	if (NewTile && NewTile->GetTileStatus() == ETileStatus::OCCUPIED && NewTile->GetChessPiece()->HumanTeam != this->HumanTeam)
+	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(HumanTeam ? 1 : -1, -1));
+	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::OCCUPIED && (*NewTile)->GetChessPiece()->HumanTeam != this->HumanTeam)
 	{
-		GameMode->ValidMoves.Add(ChessMove(this, PawnCurrentPosition, NewTile->GetGridPosition()));
+		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition()));
 	}
 }
 

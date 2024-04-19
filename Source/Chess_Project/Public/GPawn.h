@@ -15,7 +15,7 @@ class CHESS_PROJECT_API AGPawn : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	AGPawn();
-	void ValidMoves() override;
+	void GetValidMoves() override;
 
 protected:
 	// Called when the game starts or when spawned

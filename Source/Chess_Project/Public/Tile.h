@@ -47,6 +47,13 @@ public:
 
 	UStaticMeshComponent* GetStatMeshComp();
 
+	// Function called to reset a material
+	UFUNCTION()
+	void ResetMaterial();
+
+	const FString Black = TEXT("/Game/Materials/MI_Black");
+	const FString White = TEXT("/Game/Materials/MI_Tile");
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

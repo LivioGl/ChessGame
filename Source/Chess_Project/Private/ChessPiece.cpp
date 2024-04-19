@@ -26,10 +26,7 @@ void AChessPiece::Tick(float DeltaTime)
 }
 
 
-void AChessPiece::ValidMoves()
-{
-
-}
+void AChessPiece::GetValidMoves() {}
 
 FVector2D AChessPiece::GetGridPosition()
 {

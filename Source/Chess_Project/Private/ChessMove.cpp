@@ -14,17 +14,17 @@ ChessMove::ChessMove()
 
 ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final)
 {
-	Piece = MovedChessPiece;
-	Initial = Start;
-	Final = End;
+	MovedChessPiece = Piece;
+	Start = Initial;
+	End = Final;
 }
 
 ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured)
 {
-	Piece = MovedChessPiece;
-	Initial = Start;
-	Final = End;
-	Captured = CapturedChessPiece;
+	MovedChessPiece = Piece;
+	Start = Initial;
+	End = Final;
+	CapturedChessPiece = Captured;
 
 
 }

@@ -17,7 +17,7 @@ AKing::AKing()
 
 }
 
-void AKing::ValidMoves()
+void AKing::GetValidMoves()
 {
 	
 }

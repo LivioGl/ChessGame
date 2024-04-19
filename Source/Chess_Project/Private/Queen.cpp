@@ -18,7 +18,7 @@ AQueen::AQueen()
 
 }
 
-void AQueen::ValidMoves()
+void AQueen::GetValidMoves()
 {
 
 }

@@ -21,7 +21,7 @@ public:
 
 	bool IsGameOver;
 	// Array of player interfaces
-	TArray<UPlayerInterface*> Players;
+	TArray<IPlayerInterface*> Players;
 
 	int32 CurrentPlayer;
 
@@ -54,7 +54,12 @@ public:
 	// Called at the end of the game turn
 	void TurnNextPlayer();
 
+	void StartGame();
+
+	//TArray<ChessMove> CalculateMoves(AChessPiece* ClickedPiece);
 	TArray<ChessMove> ValidMoves;
+
+
 	
 protected:
 	// Called when the game starts or when spawned

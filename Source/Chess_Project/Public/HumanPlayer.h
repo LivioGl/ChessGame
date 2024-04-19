@@ -32,7 +32,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	// keeps track of turn
-	bool IsMyTurn = false;
+	bool IsMyTurn;
 
 public:	
 	// Called every frame
@@ -41,9 +41,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
-	/*virtual void OnTurn() override;
+	virtual void OnTurn() override;
 	virtual void OnWin() override;
-	virtual void OnLose() override;*/
+	virtual void OnLose() override;
 	// called on left mouse click (binding)
 	UFUNCTION()
 	void OnClick();

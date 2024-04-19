@@ -18,7 +18,7 @@ AKnight::AKnight()
 
 }
 
-void AKnight::ValidMoves()
+void AKnight::GetValidMoves()
 {
 	
 }

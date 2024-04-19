@@ -17,7 +17,7 @@ ABishop::ABishop()
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
 }
 
-void ABishop::ValidMoves()
+void ABishop::GetValidMoves()
 {
 	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());

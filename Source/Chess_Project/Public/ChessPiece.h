@@ -33,7 +33,7 @@ public:
 	FString MaterialWhite;
 	FString MaterialBlack;
 	FString MoveHint;
-	virtual void ValidMoves();
+	virtual void GetValidMoves();
 
 	FVector2D GetGridPosition();
 	

@@ -51,10 +51,12 @@ void AGameField::GenerateField()
 			if ((x + y) % 2 == 0)
 			{
 				Obj = GetWorld()->SpawnActor<ATile>(TileClassBlack, Location, FRotator::ZeroRotator);
+				HintClearEvent.AddDynamic(Obj, &ATile::ResetMaterial);
 			}
 			else
 			{
 				Obj = GetWorld()->SpawnActor<ATile>(TileClassWhite, Location, FRotator::ZeroRotator);
+				HintClearEvent.AddDynamic(Obj, &ATile::ResetMaterial);
 			}
 			const float TileScale = TileSize / 100;
 			

@@ -20,7 +20,6 @@ AHumanPlayer::AHumanPlayer()
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	// default init values
 	PlayerNumber = -1;
-	//Sign = ESign::E;
 }
 
 // Called when the game starts or when spawned
@@ -45,28 +44,28 @@ void AHumanPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 }
 
 //// OnTurn() 
-//void AHumanPlayer::OnTurn()
-//{
-//	IsMyTurn = true;
-//	// Debug String
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Your Turn"));
-//	//UMainGameInstance->SetTurnMessage(TEXT("Human Turn"));
-//}
+void AHumanPlayer::OnTurn()
+{
+	IsMyTurn = true;
+	// Debug String
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Your Turn"));
+	//UMainGameInstance->SetTurnMessage(TEXT("Human Turn"));
+}
 //
-//void AHumanPlayer::OnWin()
-//{
-//	// Debug String
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Win!"));
-//	//GameInstance->SetTurnMessage(TEXT("Human Wins!"));
-//	//GameInstance->IncrementScoreHumanPlayer();
-//}
+void AHumanPlayer::OnWin()
+{
+	// Debug String
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Win!"));
+	//GameInstance->SetTurnMessage(TEXT("Human Wins!"));
+	//GameInstance->IncrementScoreHumanPlayer();
+}
 //
-//void AHumanPlayer::OnLose()
-//{
-//	// Debug String
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Lose!"));
-//	//GameInstance->SetTurnMessage(TEXT("Human Loses!"));
-//}
+void AHumanPlayer::OnLose()
+{
+	// Debug String
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Lose!"));
+	//GameInstance->SetTurnMessage(TEXT("Human Loses!"));
+}
 
 void AHumanPlayer::OnClick()
 {
@@ -85,16 +84,28 @@ void AHumanPlayer::OnClick()
 		{
 			if (PickedPiece->HumanTeam)
 			{
+
+				// Remove previous move hints
+				GameMode->Field->HintClearEvent.Broadcast();
+
 				// Calculate Valid Moves
 				GameMode->ValidMoves.Empty();
-				PickedPiece->ValidMoves();
+				PickedPiece->GetValidMoves();
 				FVector2D StartingPosition = FVector2D(PickedPiece->PieceGridPosition.X, PickedPiece->PieceGridPosition.Y);
-				for (auto Move : GameMode->ValidMoves)
-				{	
-					ATile* TileToChange = GameMode->Field->TileMap[Move.End];
-					UMaterialInterface* MoveHintMaterial = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *PickedPiece->MoveHint));
-					UStaticMeshComponent* MoveHintComp = TileToChange->GetStatMeshComp();
-					MoveHintComp->SetMaterial(0, MoveHintMaterial);				
+				for (auto& Move : GameMode->ValidMoves)
+				{
+					auto tileMap = GameMode->Field->TileMap;
+					UE_LOG(LogTemp, Warning, TEXT("Move.End contains: %f %f"), Move.End.X, Move.End.Y);
+					if (GameMode->Field->TileMap.Contains(Move.End)) {
+						ATile* TileToChange = GameMode->Field->TileMap[Move.End];
+						UMaterialInterface* MoveHintMaterial = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *PickedPiece->MoveHint));
+						UStaticMeshComponent* MoveHintComp = TileToChange->GetStatMeshComp();
+						MoveHintComp->SetMaterial(0, MoveHintMaterial);
+					}
+					else {
+						UE_LOG(LogTemp, Warning, TEXT("No element"));
+						return;
+					}
 				}			
 			
 				if (AChessPiece* EnemyPiece = Cast<AChessPiece>(Hit.GetActor()))
@@ -116,6 +127,7 @@ void AHumanPlayer::OnClick()
 								// Setting old tile to empty and tile's player owner to -1
 								ATile* OldTile = Field->TileMap[PickedPiece->GetGridPosition()];
 								OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+								IsMyTurn = false;
 
 							}
 

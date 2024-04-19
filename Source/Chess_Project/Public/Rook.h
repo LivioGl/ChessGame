@@ -15,7 +15,7 @@ class CHESS_PROJECT_API ARook : public AChessPiece
 public:	
 	// Sets default values for this actor's properties
 	ARook();
-	void ValidMoves() override;
+	void GetValidMoves() override;
 
 protected:
 	// Called when the game starts or when spawned

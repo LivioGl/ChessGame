@@ -17,7 +17,7 @@ ARook::ARook()
 
 }
 
-void ARook::ValidMoves()
+void ARook::GetValidMoves()
 {
 }
 

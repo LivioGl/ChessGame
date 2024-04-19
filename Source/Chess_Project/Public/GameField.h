@@ -13,6 +13,9 @@
 #include "GameFramework/Actor.h"
 #include "GameField.generated.h"
 
+// Event to reset a tile's material to the original - to be called after clearing move hints
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FResetTileMaterial);
+
 UCLASS()
 class CHESS_PROJECT_API AGameField : public AActor
 {
@@ -38,6 +41,10 @@ public:
 	// size of field
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;
+
+	// Event
+	FResetTileMaterial HintClearEvent;
+
 
 	// TSubclassOf template class that provides UClass type safety
 

@@ -59,6 +59,15 @@ UStaticMeshComponent* ATile::GetStatMeshComp()
 	return StaticMeshComponent;
 }
 
+void ATile::ResetMaterial()
+{
+	bool bIsWhite = ((int)(this->GetGridPosition().X + this->GetGridPosition().Y) % 2) == 0;
+
+	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, bIsWhite ? *White : *Black));
+	UStaticMeshComponent* StatMeshComp = this->GetStatMeshComp();
+	StatMeshComp->SetMaterial(0, Material);
+}
+
 // Called when the game starts or when spawned
 void ATile::BeginPlay()
 {

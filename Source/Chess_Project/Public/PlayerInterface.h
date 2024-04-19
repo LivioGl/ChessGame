@@ -6,15 +6,6 @@
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 #include "PlayerInterface.generated.h"
-/*
-UENUM()
-enum class ESign : uint8
-{
-	X,
-	O,
-	E
-};
-*/
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
@@ -34,10 +25,10 @@ class CHESS_PROJECT_API IPlayerInterface
 public:
 	
 	int32 PlayerNumber;
-	// ESign Sign;
-	/*
+	bool PlayerTeam;
+	
 	virtual void OnTurn() {};
 	virtual void OnWin() {};
 	virtual void OnLose() {};
-	*/
+	
 };

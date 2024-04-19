@@ -11,7 +11,7 @@
 #include "RandomPlayer.generated.h"
 
 UCLASS()
-class CHESS_PROJECT_API ARandomPlayer : public APawn
+class CHESS_PROJECT_API ARandomPlayer : public APawn, public IPlayerInterface
 {
 	GENERATED_BODY()
 

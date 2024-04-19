@@ -30,6 +30,23 @@ void AMainGameMode::TurnNextPlayer()
 }
 
 
+
+void AMainGameMode::StartGame()
+{
+	// Human player starts
+	CurrentPlayer = 0;
+	for (int32 i = 0; i < Players.Num(); i++)
+	{
+		Players[i]->PlayerNumber = i;
+	}
+	// Move counter +=1
+	Players[0]->PlayerTeam = true;
+	Players[1]->PlayerTeam = false;
+
+	Players[CurrentPlayer]->OnTurn();
+}
+
+
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
@@ -48,15 +65,13 @@ void AMainGameMode::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("GFieldClass null"));
 	}
 	FVector CameraPosition = Field->GetActorLocation() + FVector(500, 500, 1000);
-	//float CameraPosX = ((Field->TileSize * (FieldSize + ((FieldSize - 1) * Field->NormalizedCellPadding) - (FieldSize - 1))) / 2) - (Field->TileSize / 2);
-	// FVector CameraPos(CameraPosX, CameraPosX, 1000.0f);
 	HumanPlayer->SetActorLocationAndRotation(CameraPosition, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
-
-
-	// 
-	// La telecamera può stare in una posizione statica?
-
-
+	
+	// Add Human and AI Player
+	Players.Add(HumanPlayer);
+	auto AiPlayer = GetWorld()->SpawnActor<ARandomPlayer>();
+	Players.Add(AiPlayer);
+	this->StartGame();
 
 }
 

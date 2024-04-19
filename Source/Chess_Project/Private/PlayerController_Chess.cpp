@@ -2,6 +2,7 @@
 
 
 #include "PlayerController_Chess.h"
+#include "Components/InputComponent.h"
 
 APlayerController_Chess::APlayerController_Chess()
 {
