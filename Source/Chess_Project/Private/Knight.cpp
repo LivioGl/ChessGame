@@ -24,7 +24,7 @@ void AKnight::GetValidMoves()
 	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
-	// Current Bishop position saved in this pointer
+	// Current Knight position saved in this pointer
 	FVector2D KnightCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
 	ATile* CurrentPosition = Field->TileMap[(KnightCurrentPosition)];
 	// Directions of possibile moves
@@ -41,12 +41,12 @@ void AKnight::GetValidMoves()
 	{
 		while (auto NewTiles = Field->TileMap.Find(KnightCurrentPosition + KnMovements[i]))
 		{
-			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
+			// Check the directions where Knight is able to move and gets empty tiles or enemy pieces
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
 			{
 				// Save the move in a gamemode array
-				ChessMove KingSingleMove(this, KnightCurrentPosition, KnightCurrentPosition + KnMovements[i]);
-				GameMode->ValidMoves.Add(KingSingleMove);
+				ChessMove KnightSingleMove(this, KnightCurrentPosition, KnightCurrentPosition + KnMovements[i]);
+				GameMode->ValidMoves.Add(KnightSingleMove);
 			}
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
 			// Cycle to cover all the chess board

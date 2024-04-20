@@ -23,7 +23,7 @@ void AKing::GetValidMoves()
 	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
-	// Current Bishop position saved in this pointer
+	// Current King position saved in this pointer
 	FVector2D KingCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
 	ATile* CurrentPosition = Field->TileMap[(KingCurrentPosition)];
 	// Directions of possibile moves

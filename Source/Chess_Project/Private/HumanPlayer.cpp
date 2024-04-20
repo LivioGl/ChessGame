@@ -74,20 +74,21 @@ void AHumanPlayer::OnClick()
 	//Structure containing information about one hit of a trace, such as point of impact and surface normal at that point
 	// Info about where I clicked
 	FHitResult Hit = FHitResult(ForceInit);
+
+	static AChessPiece* ClickedPiece = nullptr;
 	// GetHitResultUnderCursor function sends a ray from the mouse position and gives the corresponding hit results
 	GetWorld()->GetFirstPlayerController()->GetHitResultUnderCursor(ECollisionChannel::ECC_Pawn, true, Hit);
 	// Check if I clicked something and MyTurn is true
 	if (Hit.bBlockingHit && IsMyTurn)
 	{
-		// When I click an actor (gets the clicked piece from the board)
 		if (AChessPiece* PickedPiece = Cast<AChessPiece>(Hit.GetActor()))
 		{
+			// Click on a human team piece
 			if (PickedPiece->HumanTeam)
 			{
-
+				ClickedPiece = PickedPiece;
 				// Remove previous move hints
 				GameMode->Field->HintClearEvent.Broadcast();
-
 				// Calculate Valid Moves
 				GameMode->ValidMoves.Empty();
 				PickedPiece->GetValidMoves();
@@ -96,48 +97,67 @@ void AHumanPlayer::OnClick()
 				{
 					auto tileMap = GameMode->Field->TileMap;
 					UE_LOG(LogTemp, Warning, TEXT("Move.End contains: %f %f"), Move.End.X, Move.End.Y);
-					if (GameMode->Field->TileMap.Contains(Move.End)) {
+					if (GameMode->Field->TileMap.Contains(Move.End))
+					{
 						ATile* TileToChange = GameMode->Field->TileMap[Move.End];
 						UMaterialInterface* MoveHintMaterial = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, *PickedPiece->MoveHint));
 						UStaticMeshComponent* MoveHintComp = TileToChange->GetStatMeshComp();
 						MoveHintComp->SetMaterial(0, MoveHintMaterial);
 					}
-					else {
+					else
+					{
 						UE_LOG(LogTemp, Warning, TEXT("No element"));
 						return;
 					}
-				}			
-			
-				if (AChessPiece* EnemyPiece = Cast<AChessPiece>(Hit.GetActor()))
-				{
-					// Check if targeted piece belongs to the other team
-					if (EnemyPiece->HumanTeam != PickedPiece->HumanTeam)
-					{
-						FVector2D EndPiece = FVector2D(EnemyPiece->PieceGridPosition.X, EnemyPiece->PieceGridPosition.Y);
-						for (int32 i = 0; i < GameMode->ValidMoves.Num(); i++)
-						{
-							// Making sure picked piece and enemy piece represent a valid move
-							if (StartingPosition == GameMode->ValidMoves[i].Start && EndPiece == GameMode->ValidMoves[i].End)
-							{
-								// Gamefield pointer
-								AGameField* Field = GameMode->Field;
-								// Moving the piece
-								FVector tmp = Field->GetRelativeLocationByXYPosition(EndPiece.X, EndPiece.Y);
-								PickedPiece->SetActorLocation(tmp);
-								// Setting old tile to empty and tile's player owner to -1
-								ATile* OldTile = Field->TileMap[PickedPiece->GetGridPosition()];
-								OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
-								IsMyTurn = false;
-
-							}
-
-						}
-					}
 				}
-			
 			}
+			else
+			{
+				if (ClickedPiece == nullptr)
+				{
+					return;
+				}
+				GameMode->ValidMoves.Empty();
+				ClickedPiece->GetValidMoves();
+				GameMode->Field->HintClearEvent.Broadcast();
+				FVector2D EndPiece = FVector2D(ClickedPiece->PieceGridPosition.X, ClickedPiece->PieceGridPosition.Y);
+				ChessMove CandidateMove = ChessMove(ClickedPiece, PickedPiece->GetGridPosition(), EndPiece, ClickedPiece);
+				if (!GameMode->ValidMoves.Contains(CandidateMove)) return;	
+				
+				// Gamefield pointer
+				AGameField* Field = GameMode->Field;
+				// Moving the piece
+				FVector tmp = Field->GetRelativeLocationByXYPosition(EndPiece.X, EndPiece.Y);
+				PickedPiece->SetActorLocation(tmp);
+				// Setting old tile to empty and tile's player owner to -1
+				ATile* OldTile = Field->TileMap[PickedPiece->GetGridPosition()];
+				OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+				IsMyTurn = false;		
+
+				
+			}		
+		}	
+
+		if (ATile* PickedTile = Cast<ATile>(Hit.GetActor()))
+		{
+			if (!ClickedPiece)
+			{
+				return;
+			}
+			GameMode->Field->HintClearEvent.Broadcast();
+			AGameField* Field = GameMode->Field;
+			// Moving the piece 
+			ATile* NewTile = Field->TileMap[PickedTile->GetGridPosition()];
+			FVector NewPosition = Field->GetRelativeLocationByXYPosition(NewTile->GetGridPosition().X, NewTile->GetGridPosition().Y);
+			ClickedPiece->SetActorLocation(Field->GetActorLocation() + NewPosition);
+			NewTile->SetTileStatus(0, ETileStatus::OCCUPIED);
+			// Setting old tile to empty and tile's player owner to -1
+			ATile* OldTile = Field->TileMap[ClickedPiece->GetGridPosition()];
+			OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+			IsMyTurn = false;
 		}
 	}
-
 }
+
+
 
