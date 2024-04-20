@@ -44,6 +44,11 @@ AChessPiece* ATile::GetChessPiece()
 	return Piece;
 }
 
+void ATile::SetChessPiece(AChessPiece* NewPiece)
+{
+	Piece = NewPiece;
+}
+
 void ATile::SetGridPosition(const double InX, const double InY)
 {
 	TileGridPosition.Set(InX, InY);
@@ -61,7 +66,7 @@ UStaticMeshComponent* ATile::GetStatMeshComp()
 
 void ATile::ResetMaterial()
 {
-	bool bIsWhite = ((int)(this->GetGridPosition().X + this->GetGridPosition().Y) % 2) == 0;
+	bool bIsWhite = ((int)(this->GetGridPosition().X + this->GetGridPosition().Y) % 2) == 1;
 
 	UMaterialInterface* Material = Cast<UMaterialInterface>(StaticLoadObject(NULL, nullptr, bIsWhite ? *White : *Black));
 	UStaticMeshComponent* StatMeshComp = this->GetStatMeshComp();

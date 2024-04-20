@@ -2,6 +2,7 @@
 
 
 #include "King.h"
+#include "MainGameMode.h"
 
 // Sets default values
 AKing::AKing()
@@ -19,7 +20,39 @@ AKing::AKing()
 
 void AKing::GetValidMoves()
 {
-	
+	// Gamemode and Gamefield reference
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	AGameField* Field = GameMode->Field;
+	// Current Bishop position saved in this pointer
+	FVector2D KingCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
+	ATile* CurrentPosition = Field->TileMap[(KingCurrentPosition)];
+	// Directions of possibile moves
+	FVector2D KMovements[8];
+	KMovements[0] = FVector2D(0, 1);
+	KMovements[1] = FVector2D(1, 1);
+	KMovements[2] = FVector2D(1, 0);
+	KMovements[3] = FVector2D(1, -1);
+	KMovements[4] = FVector2D(0, -1);
+	KMovements[5] = FVector2D(-1, -1);
+	KMovements[6] = FVector2D(-1, 0);
+	KMovements[7] = FVector2D(-1, 1);
+	for (int i = 0; i < 8; i++)
+	{
+		while (auto NewTiles = Field->TileMap.Find(KingCurrentPosition + KMovements[i]))
+		{
+			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			{
+				// Save the move in a gamemode array
+				ChessMove KingSingleMove(this, KingCurrentPosition, KingCurrentPosition + KMovements[i]);
+				GameMode->ValidMoves.Add(KingSingleMove);
+			}
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
+			
+			i++;
+		}
+	}
+
 }
 
 

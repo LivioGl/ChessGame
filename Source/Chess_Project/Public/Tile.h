@@ -39,6 +39,8 @@ public:
 	// get the piece type in a specific tile
 	AChessPiece* GetChessPiece();
 
+	void SetChessPiece(AChessPiece* NewPiece);
+
 	// set the (x, y) position
 	void SetGridPosition(const double InX, const double InY);
 

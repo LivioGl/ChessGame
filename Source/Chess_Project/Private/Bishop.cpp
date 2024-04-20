@@ -33,16 +33,16 @@ void ABishop::GetValidMoves()
 	BMovements[3] = FVector2D(1, -1);
 	for (int i = 0; i < 4; i++)
 	{
-		while (auto NewTiles = Field->TileMap[(BishopCurrentPosition + BMovements[i])])
+		while (auto NewTiles = Field->TileMap.Find(BishopCurrentPosition + BMovements[i]))
 		{
 			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
-			if ((NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
 			{
 				// Save the move in a gamemode array
 				ChessMove BishopSingleMove(this, BishopCurrentPosition, BishopCurrentPosition+BMovements[i]);
 				GameMode->ValidMoves.Add(BishopSingleMove);
 			}
-			if ((NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
 			// Cycle to cover all the chess board
 			BMovements[i].X > 0 ? BMovements[i].X += 1 : BMovements[i].X -= 1;
 			BMovements[i].Y > 0 ? BMovements[i].Y += 1 : BMovements[i].Y -= 1;

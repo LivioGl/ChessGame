@@ -2,6 +2,7 @@
 
 
 #include "Knight.h"
+#include "MainGameMode.h"
 
 // Sets default values
 AKnight::AKnight()
@@ -20,7 +21,38 @@ AKnight::AKnight()
 
 void AKnight::GetValidMoves()
 {
-	
+	// Gamemode and Gamefield reference
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	AGameField* Field = GameMode->Field;
+	// Current Bishop position saved in this pointer
+	FVector2D KnightCurrentPosition(PieceGridPosition.X, PieceGridPosition.Y);
+	ATile* CurrentPosition = Field->TileMap[(KnightCurrentPosition)];
+	// Directions of possibile moves
+	FVector2D KnMovements[8];
+	KnMovements[0] = FVector2D(1, 2);
+	KnMovements[1] = FVector2D(2, 1);
+	KnMovements[2] = FVector2D(2, -1);
+	KnMovements[3] = FVector2D(1, -2);
+	KnMovements[4] = FVector2D(-1, -2);
+	KnMovements[5] = FVector2D(-2, -1);
+	KnMovements[6] = FVector2D(-2, 1);
+	KnMovements[7] = FVector2D(-1, 2);
+	for (int i = 0; i < 8; i++)
+	{
+		while (auto NewTiles = Field->TileMap.Find(KnightCurrentPosition + KnMovements[i]))
+		{
+			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			{
+				// Save the move in a gamemode array
+				ChessMove KingSingleMove(this, KnightCurrentPosition, KnightCurrentPosition + KnMovements[i]);
+				GameMode->ValidMoves.Add(KingSingleMove);
+			}
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
+			// Cycle to cover all the chess board
+			i++;
+		}
+	}
 }
 
 // Called when the game starts or when spawned

@@ -81,6 +81,8 @@ void AGameField::SpawnPieces()
 		WhitePawn->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhitePawn->SetGridPosition(1, b);
 		ChangeMaterial(WhitePawn, false);
+		this->TileMap[FVector2D(1, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(1, b)]->SetChessPiece(WhitePawn);
 	}
 	// Spawning Black Pawns
 	for (int32 b = 0; b < 8; b++)
@@ -94,6 +96,8 @@ void AGameField::SpawnPieces()
 		// Setting team to AI team
 		BlackPawn->HumanTeam = false;
 		ChangeMaterial(BlackPawn, true);
+		this->TileMap[FVector2D(6, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(6, b)]->SetChessPiece(BlackPawn);
 	}
 	// Spawning White Bishops
 	for (int32 b = 2; b < 6; b+=3)
@@ -105,6 +109,8 @@ void AGameField::SpawnPieces()
 		WhiteBishop->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhiteBishop->SetGridPosition(0, b);
 		ChangeMaterial(WhiteBishop, false);
+		this->TileMap[FVector2D(0, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(0, b)]->SetChessPiece(WhiteBishop);
 	}
 	// Spawning Black Bishops
 	for (int32 b = 2; b < 6; b += 3)
@@ -118,6 +124,8 @@ void AGameField::SpawnPieces()
 		// Setting team to AI team
 		BlackBishop->HumanTeam = false;
 		ChangeMaterial(BlackBishop, true);
+		this->TileMap[FVector2D(7, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(7, b)]->SetChessPiece(BlackBishop);
 	}
 	// Spawning White Rooks
 	for (int32 b = 0; b < 9; b += 7)
@@ -129,6 +137,8 @@ void AGameField::SpawnPieces()
 		WhiteRook->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhiteRook->SetGridPosition(0, b);
 		ChangeMaterial(WhiteRook, false);
+		this->TileMap[FVector2D(0, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(0, b)]->SetChessPiece(WhiteRook);
 	}
 
 	// Spawning Black Rooks
@@ -139,10 +149,12 @@ void AGameField::SpawnPieces()
 		BlackRook = GetWorld()->SpawnActor<ARook>(Rook, Location, FRotator::ZeroRotator);
 		const float PieceScale = PieceSize / 100;
 		BlackRook->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
-		BlackRook->SetGridPosition(0, b);
+		BlackRook->SetGridPosition(7, b);
 		// Setting team to AI team
 		BlackRook->HumanTeam = false;
 		ChangeMaterial(BlackRook, true);
+		this->TileMap[FVector2D(7, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(7, b)]->SetChessPiece(BlackRook);
 	}
 	// Spawning White King
 	FVector WhiteKingLocation = AGameField::GetRelativeLocationByXYPosition(0, 4);
@@ -152,6 +164,8 @@ void AGameField::SpawnPieces()
 	WhiteKing->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	WhiteKing->SetGridPosition(0, 4);
 	ChangeMaterial(WhiteKing, false);
+	this->TileMap[FVector2D(0, 4)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+	this->TileMap[FVector2D(0, 4)]->SetChessPiece(WhiteKing);
 
 	// Spawning Black King
 	FVector BlackKingLocation = AGameField::GetRelativeLocationByXYPosition(7, 4);
@@ -162,6 +176,8 @@ void AGameField::SpawnPieces()
 	// Setting team to AI team
 	BlackKing->HumanTeam = false;
 	ChangeMaterial(BlackKing, true);
+	this->TileMap[FVector2D(7, 4)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+	this->TileMap[FVector2D(7, 4)]->SetChessPiece(BlackKing);
 	
 	// Spawning White Queen
 	FVector WhiteQueenLocation = AGameField::GetRelativeLocationByXYPosition(0, 3);
@@ -170,6 +186,8 @@ void AGameField::SpawnPieces()
 	WhiteQueen->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	WhiteQueen->SetGridPosition(0, 3);
 	ChangeMaterial(WhiteQueen, false);
+	this->TileMap[FVector2D(0, 3)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+	this->TileMap[FVector2D(0, 3)]->SetChessPiece(WhiteQueen);
 
 	// Spawning Black Queen
 	FVector BlackQueenLocation = AGameField::GetRelativeLocationByXYPosition(7, 3);
@@ -180,6 +198,8 @@ void AGameField::SpawnPieces()
 	// Setting team to AI team
 	BlackQueen->HumanTeam = false;
 	ChangeMaterial(BlackQueen, true);
+	this->TileMap[FVector2D(7, 3)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+	this->TileMap[FVector2D(7, 3)]->SetChessPiece(BlackQueen);
 
 	// Spawning White Knights
 	for (int32 b = 1; b < 7; b += 5)
@@ -190,6 +210,8 @@ void AGameField::SpawnPieces()
 		WhiteKnight->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhiteKnight->SetGridPosition(0, b);
 		ChangeMaterial(WhiteKnight, false);
+		this->TileMap[FVector2D(0, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(0, b)]->SetChessPiece(WhiteKnight);
 	}
 
 	// Spawning Black Knights
@@ -203,6 +225,8 @@ void AGameField::SpawnPieces()
 		// Setting team to AI team
 		BlackKnight->HumanTeam = false;
 		ChangeMaterial(BlackKnight, true);
+		this->TileMap[FVector2D(7, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(7, b)]->SetChessPiece(BlackKnight);
 	}
 }
 
