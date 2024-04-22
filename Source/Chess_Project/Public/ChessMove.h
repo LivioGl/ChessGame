@@ -18,6 +18,8 @@ public:
 	// Pointer to captured piece
 	AChessPiece* CapturedChessPiece = nullptr;
 
+	bool bIsCaptured = false;
+
 	ChessMove();
 	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final);
 	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured);

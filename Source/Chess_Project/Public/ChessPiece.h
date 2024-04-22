@@ -39,6 +39,7 @@ public:
 	FVector2D GetGridPosition();
 	
 	void SetGridPosition(const double InX, const double InY);
+	void SetGridPosition(FVector2D NewPosition);
 
 protected:
 	// Called when the game starts or when spawned

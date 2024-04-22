@@ -51,12 +51,16 @@ public:
 	// Called at the end of the game turn
 	void TurnNextPlayer();
 
-	void StartGame();;
+	void StartGame();
 	TArray<ChessMove> ValidMoves;
 
+	AChessPiece* MakeMove(ChessMove& Move, bool bIsRealMove);
+
+	void MovePieceToLocation(AChessPiece* Piece, FVector2D Location) const;
 
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 };

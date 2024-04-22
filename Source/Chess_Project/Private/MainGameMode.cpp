@@ -30,7 +30,11 @@ void AMainGameMode::TurnNextPlayer()
 	Players[CurrentPlayer]->OnTurn();
 }
 
+void AMainGameMode::MovePieceToLocation(AChessPiece* Piece, FVector2D Location) const
+{
+	Piece->SetActorLocation(Field->GetRelativeLocationByXYPosition(Location.X, Location.Y));
 
+}
 
 void AMainGameMode::StartGame()
 {
@@ -74,6 +78,56 @@ void AMainGameMode::BeginPlay()
 	Players.Add(AiPlayer);
 	this->StartGame();
 
+}
+
+AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
+{
+	ATile* OldTile = *(this->Field->TileMap.Find(Move.Start));
+	ATile* NewTile = *(this->Field->TileMap.Find(Move.End));
+
+	AChessPiece* MovedPiece = OldTile->GetChessPiece();
+	AChessPiece* CapturedPiece = NewTile->GetChessPiece();
+
+	// Imposta il pezzo della nuova tile al pezzo spostato,
+	// La tile del pezzo spostato a quella nuova,
+	// Il pezzo della tile vecchia a nullptr
+	// 
+	// Cattura:
+	// Cancella il pezzo catturato dal TileArray
+	// 
+	// Mossa reale:
+	// Sposta l'attore, cancella pezzo catturato
+
+	if (Move.CapturedChessPiece)
+	{
+		if (bIsRealMove)
+		{
+			Move.MovedChessPiece->bHumanTeam ?
+				this->Field->WhitePieces.Remove(CapturedPiece) :
+				this->Field->BlackPieces.Remove(CapturedPiece);
+			
+			CapturedPiece->Destroy();
+		}
+		else
+		{
+			CapturedPiece->bIsCaptured = true;
+		}
+	}
+
+	NewTile->SetChessPiece(MovedPiece);
+
+	MovedPiece->SetGridPosition(NewTile->GetGridPosition());
+	OldTile->SetChessPiece(nullptr);
+	// New line
+	NewTile->SetTileStatus(MovedPiece->bHumanTeam ? 0 : -1, ETileStatus::OCCUPIED);
+	if (bIsRealMove)
+	{
+		MovePieceToLocation(MovedPiece, NewTile->GetGridPosition());
+		OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+	}
+	
+
+	return CapturedPiece;
 }
 
 

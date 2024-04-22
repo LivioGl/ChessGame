@@ -38,6 +38,11 @@ void AChessPiece::SetGridPosition(const double InX, const double InY)
 	PieceGridPosition.Set(InX, InY);
 }
 
+void AChessPiece::SetGridPosition(FVector2D NewPosition)
+{
+	this->SetGridPosition(NewPosition.X, NewPosition.Y);
+}
+
 UStaticMeshComponent* AChessPiece::GetStatMeshComp()
 {
 	return StaticMeshComponent;

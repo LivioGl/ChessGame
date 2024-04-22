@@ -123,17 +123,16 @@ void AHumanPlayer::OnClick()
 				FVector2D EndPiece = FVector2D(ClickedPiece->PieceGridPosition.X, ClickedPiece->PieceGridPosition.Y);
 				ChessMove CandidateMove = ChessMove(ClickedPiece, PickedPiece->GetGridPosition(), EndPiece, ClickedPiece);
 				if (!GameMode->ValidMoves.Contains(CandidateMove)) return;	
-				
-				ClickedPiece->bIsCaptured = true;
+				// Chiamata a MakeMove
+				AChessPiece* CapturedPiece = GameMode->MakeMove(CandidateMove, true);
+				// FATTO IN MAKEMOVE: ClickedPiece->bIsCaptured = true;
 				// Gamefield pointer
 				AGameField* Field = GameMode->Field;
-				// Moving the piece
-				FVector tmp = Field->GetRelativeLocationByXYPosition(EndPiece.X, EndPiece.Y);
-				PickedPiece->SetActorLocation(tmp);
+				// TODO: chiamata a MakeMove
 				// Setting old tile to empty and tile's player owner to -1
-				ATile* OldTile = Field->TileMap[PickedPiece->GetGridPosition()];
-				OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
-				
+				// FATTO IN MAKEMOVE ATile* OldTile = Field->TileMap[PickedPiece->GetGridPosition()];
+				// FATTO IN MAKEMOVE OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+				GameMode->ValidMoves.Empty();
 				IsMyTurn = false;		
 				GameMode->TurnNextPlayer();
 				
@@ -156,6 +155,7 @@ void AHumanPlayer::OnClick()
 			// Setting old tile to empty and tile's player owner to -1
 			ATile* OldTile = Field->TileMap[ClickedPiece->GetGridPosition()];
 			OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+			GameMode->ValidMoves.Empty();
 			IsMyTurn = false;
 
 			GameMode->TurnNextPlayer();
