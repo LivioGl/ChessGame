@@ -41,7 +41,7 @@ void AQueen::GetValidMoves()
 		while (auto NewTiles = Field->TileMap.Find(QueenCurrentPosition + QMovements[i]))
 		{
 			// Check the directions where Queen is able to move and gets empty tiles or enemy pieces
-			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
 				ChessMove QueenSingleMove(this, QueenCurrentPosition, QueenCurrentPosition + QMovements[i]);

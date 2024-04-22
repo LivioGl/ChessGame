@@ -44,19 +44,14 @@ public:
 	int32 Size;
 
 	AMainGameMode();
-
-	// set the cell sign and the position 
-	//void SetCellSign(const int32 PlayerNumber, const FVector& SpawnPosition);
-
+ 
 	// Get the next player index
 	int32 GetNextPlayer(int32 Player);
 
 	// Called at the end of the game turn
 	void TurnNextPlayer();
 
-	void StartGame();
-
-	//TArray<ChessMove> CalculateMoves(AChessPiece* ClickedPiece);
+	void StartGame();;
 	TArray<ChessMove> ValidMoves;
 
 

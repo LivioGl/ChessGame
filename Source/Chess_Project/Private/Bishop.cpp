@@ -36,7 +36,7 @@ void ABishop::GetValidMoves()
 		while (auto NewTiles = Field->TileMap.Find(BishopCurrentPosition + BMovements[i]))
 		{
 			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
-			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
 				ChessMove BishopSingleMove(this, BishopCurrentPosition, BishopCurrentPosition+BMovements[i]);

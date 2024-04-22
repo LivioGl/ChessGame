@@ -26,7 +26,8 @@ int32 AMainGameMode::GetNextPlayer(int32 Player)
 
 void AMainGameMode::TurnNextPlayer()
 {
-
+	GetNextPlayer(CurrentPlayer);
+	Players[CurrentPlayer]->OnTurn();
 }
 
 

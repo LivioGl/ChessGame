@@ -91,11 +91,19 @@ public:
 	// generate an empty game field
 	void GenerateField();
 
-	// Generates the pieces
-	void SpawnPieces();
+	
 
 	// Assign black or white color to a piece
 	void ChangeMaterial(AChessPiece* S, bool IsBlack);
+
+	// return the array of black pieces
+	TArray<AChessPiece*> BlackPieces;
+
+	// return the array of white pieces
+	TArray<AChessPiece*> WhitePieces;
+
+	// Generates the pieces
+	void SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*> &BPieces);
 
 	// return the array of tile pointers
 	TArray<ATile*>& GetTileArray();

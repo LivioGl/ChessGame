@@ -42,7 +42,7 @@ void AKnight::GetValidMoves()
 		while (auto NewTiles = Field->TileMap.Find(KnightCurrentPosition + KnMovements[i]))
 		{
 			// Check the directions where Knight is able to move and gets empty tiles or enemy pieces
-			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->HumanTeam != this->HumanTeam)
+			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
 				ChessMove KnightSingleMove(this, KnightCurrentPosition, KnightCurrentPosition + KnMovements[i]);

@@ -84,7 +84,7 @@ void AHumanPlayer::OnClick()
 		if (AChessPiece* PickedPiece = Cast<AChessPiece>(Hit.GetActor()))
 		{
 			// Click on a human team piece
-			if (PickedPiece->HumanTeam)
+			if (PickedPiece->bHumanTeam)
 			{
 				ClickedPiece = PickedPiece;
 				// Remove previous move hints
@@ -124,6 +124,7 @@ void AHumanPlayer::OnClick()
 				ChessMove CandidateMove = ChessMove(ClickedPiece, PickedPiece->GetGridPosition(), EndPiece, ClickedPiece);
 				if (!GameMode->ValidMoves.Contains(CandidateMove)) return;	
 				
+				ClickedPiece->bIsCaptured = true;
 				// Gamefield pointer
 				AGameField* Field = GameMode->Field;
 				// Moving the piece
@@ -132,8 +133,9 @@ void AHumanPlayer::OnClick()
 				// Setting old tile to empty and tile's player owner to -1
 				ATile* OldTile = Field->TileMap[PickedPiece->GetGridPosition()];
 				OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+				
 				IsMyTurn = false;		
-
+				GameMode->TurnNextPlayer();
 				
 			}		
 		}	
@@ -155,6 +157,8 @@ void AHumanPlayer::OnClick()
 			ATile* OldTile = Field->TileMap[ClickedPiece->GetGridPosition()];
 			OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
 			IsMyTurn = false;
+
+			GameMode->TurnNextPlayer();
 		}
 	}
 }

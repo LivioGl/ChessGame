@@ -7,7 +7,7 @@
 ARandomPlayer::ARandomPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
@@ -32,21 +32,21 @@ void ARandomPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 }
 
-//void ARandomPlayer::OnTurn()
-//{
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Tocca al Bot!"));
-//	FTimerHandle TimerHandle;
-//
-//	// GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]() {});
-//}
-//
-//void ARandomPlayer::OnWin()
-//{
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha vinto!"));
-//}
-//
-//void ARandomPlayer::OnLose()
-//{
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha perso!"));
-//}
+void ARandomPlayer::OnTurn()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Tocca al Bot!"));
+	FTimerHandle TimerHandle;
+
+	//GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]() {});
+}
+
+void ARandomPlayer::OnWin()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha vinto!"));
+}
+
+void ARandomPlayer::OnLose()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha perso!"));
+}
 

@@ -17,7 +17,8 @@ public:
 	// Sets default values for this actor's properties
 	AChessPiece();
 
-	bool HumanTeam = true;
+	bool bIsCaptured = false;
+	bool bHumanTeam = true;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FVector2D PieceGridPosition;
