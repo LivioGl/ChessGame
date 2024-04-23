@@ -39,7 +39,7 @@ void ABishop::GetValidMoves()
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
-				ChessMove BishopSingleMove(this, BishopCurrentPosition, BishopCurrentPosition+BMovements[i]);
+				ChessMove BishopSingleMove(this, BishopCurrentPosition, BishopCurrentPosition+BMovements[i], (*NewTiles)->GetChessPiece());
 				GameMode->ValidMoves.Add(BishopSingleMove);
 			}
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;

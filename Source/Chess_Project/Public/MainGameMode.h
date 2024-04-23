@@ -56,7 +56,7 @@ public:
 
 	AChessPiece* MakeMove(ChessMove& Move, bool bIsRealMove);
 
-	void MovePieceToLocation(AChessPiece* Piece, FVector2D Location) const;
+	void MovePieceToLocation(AChessPiece* CPiece, FVector2D Location) const;
 
 	
 protected:

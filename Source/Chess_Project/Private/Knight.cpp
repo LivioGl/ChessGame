@@ -45,7 +45,7 @@ void AKnight::GetValidMoves()
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
-				ChessMove KnightSingleMove(this, KnightCurrentPosition, KnightCurrentPosition + KnMovements[i]);
+				ChessMove KnightSingleMove(this, KnightCurrentPosition, KnightCurrentPosition + KnMovements[i], (*NewTiles)->GetChessPiece());
 				GameMode->ValidMoves.Add(KnightSingleMove);
 			}
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;

@@ -30,9 +30,9 @@ void AMainGameMode::TurnNextPlayer()
 	Players[CurrentPlayer]->OnTurn();
 }
 
-void AMainGameMode::MovePieceToLocation(AChessPiece* Piece, FVector2D Location) const
+void AMainGameMode::MovePieceToLocation(AChessPiece* CPiece, FVector2D Location) const
 {
-	Piece->SetActorLocation(Field->GetRelativeLocationByXYPosition(Location.X, Location.Y));
+	CPiece->SetActorLocation(Field->GetRelativeLocationByXYPosition(Location.X, Location.Y));
 
 }
 

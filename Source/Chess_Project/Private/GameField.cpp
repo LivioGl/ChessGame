@@ -212,12 +212,11 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 	for (int32 b = 1; b < 7; b += 5)
 	{
 		FVector WhiteKnightsLocation = AGameField::GetRelativeLocationByXYPosition(0, b);
-		AKnight* WhiteKnight;
-		WhiteKnight = GetWorld()->SpawnActor<AKnight>(Knight, WhiteKnightsLocation, FRotator::ZeroRotator);
+		AKnight* WhiteKnight = GetWorld()->SpawnActor<AKnight>(Knight, WhiteKnightsLocation, FRotator::ZeroRotator);
 		WhiteKnight->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhiteKnight->SetGridPosition(0, b);
 		ChangeMaterial(WhiteKnight, false);
-		this->TileMap[FVector2D(0, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(0, b)]->SetTileStatus(0, ETileStatus::OCCUPIED);
 		this->TileMap[FVector2D(0, b)]->SetChessPiece(WhiteKnight);
 		WhitePieces.Add(WhiteKnight);
 	}

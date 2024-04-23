@@ -40,13 +40,13 @@ void ARook::GetValidMoves()
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
-				ChessMove RookSingleMove(this, RookCurrentPosition, RookCurrentPosition + BMovements[i]);
+				ChessMove RookSingleMove(this, RookCurrentPosition, RookCurrentPosition + BMovements[i], (*NewTiles)->GetChessPiece());
 				GameMode->ValidMoves.Add(RookSingleMove);
 			}
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
 			// Cycle to cover all the chess board
-			BMovements[i].X > 0 ? BMovements[i].X += 1 : BMovements[i].X -= 1;
-			BMovements[i].Y > 0 ? BMovements[i].Y += 1 : BMovements[i].Y -= 1;
+			BMovements[i].X == 0 ? 0 : BMovements[i].X > 0 ? BMovements[i].X += 1 : BMovements[i].X -= 1;
+			BMovements[i].Y == 0 ? 0 : BMovements[i].Y > 0 ? BMovements[i].Y += 1 : BMovements[i].Y -= 1;
 		}
 	}
 }

@@ -44,7 +44,7 @@ void AKing::GetValidMoves()
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
-				ChessMove KingSingleMove(this, KingCurrentPosition, KingCurrentPosition + KMovements[i]);
+				ChessMove KingSingleMove(this, KingCurrentPosition, KingCurrentPosition + KMovements[i], (*NewTiles)->GetChessPiece());
 				GameMode->ValidMoves.Add(KingSingleMove);
 			}
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;

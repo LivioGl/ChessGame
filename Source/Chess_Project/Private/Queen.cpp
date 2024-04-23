@@ -44,13 +44,13 @@ void AQueen::GetValidMoves()
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
-				ChessMove QueenSingleMove(this, QueenCurrentPosition, QueenCurrentPosition + QMovements[i]);
+				ChessMove QueenSingleMove(this, QueenCurrentPosition, QueenCurrentPosition + QMovements[i], (*NewTiles)->GetChessPiece());
 				GameMode->ValidMoves.Add(QueenSingleMove);
 			}
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::OCCUPIED) break;
 			// Cycle to cover all the chess board
-			QMovements[i].X > 0 ? QMovements[i].X += 1 : QMovements[i].X -= 1;
-			QMovements[i].Y > 0 ? QMovements[i].Y += 1 : QMovements[i].Y -= 1;
+			QMovements[i].X == 0 ? 0 : QMovements[i].X > 0 ? QMovements[i].X += 1 : QMovements[i].X -= 1;
+			QMovements[i].Y == 0 ? 0 : QMovements[i].Y > 0 ? QMovements[i].Y += 1 : QMovements[i].Y -= 1;
 		}
 	}
 }
