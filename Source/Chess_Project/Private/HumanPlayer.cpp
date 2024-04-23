@@ -71,6 +71,7 @@ void AHumanPlayer::OnClick()
 {
 	// Gamemode reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+
 	//Structure containing information about one hit of a trace, such as point of impact and surface normal at that point
 	// Info about where I clicked
 	FHitResult Hit = FHitResult(ForceInit);

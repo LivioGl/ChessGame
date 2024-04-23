@@ -21,12 +21,23 @@ AMainGameMode::AMainGameMode()
 
 int32 AMainGameMode::GetNextPlayer(int32 Player)
 {
-	return int32();
+	Player++;
+	if (!Players.IsValidIndex(Player))
+	{
+		Player = 0;
+	}
+	return Player;
 }
 
 void AMainGameMode::TurnNextPlayer()
 {
-	GetNextPlayer(CurrentPlayer);
+	CurrentPlayer = GetNextPlayer(CurrentPlayer);
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+		{
+			// function to delay
+			Players[CurrentPlayer]->OnTurn();
+		}, 2, false);
 	Players[CurrentPlayer]->OnTurn();
 }
 

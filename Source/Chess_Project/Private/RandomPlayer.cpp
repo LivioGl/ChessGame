@@ -36,6 +36,26 @@ void ARandomPlayer::OnTurn()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Tocca al Bot!"));
 	FTimerHandle TimerHandle;
+	
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	// Calcolo delle mosse valide dall'Array BlackPieces
+	// Randomizza una mossa valida
+	
+
+	// Black Pieces Array
+
+	int32 RandIdx = FMath::Rand() % GameMode->Field->BlackPieces.Num();
+	GameMode->Field->BlackPieces[RandIdx]->GetValidMoves();
+	// Se il pezzo non ha mosse valide ne pesco un altro
+	while (GameMode->ValidMoves.IsEmpty())
+	{
+		RandIdx = FMath::Rand() % GameMode->Field->BlackPieces.Num();
+		GameMode->Field->BlackPieces[RandIdx]->GetValidMoves();
+	}
+	int32 MoveRand = FMath::Rand() % GameMode->ValidMoves.Num();
+	AChessPiece* BlackMovedPiece = GameMode->MakeMove(GameMode->ValidMoves[MoveRand], true);
+	GameMode->ValidMoves.Empty();
+	GameMode->TurnNextPlayer();
 
 	//GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]() {});
 }
