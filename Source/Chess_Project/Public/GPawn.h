@@ -13,6 +13,7 @@ class CHESS_PROJECT_API AGPawn : public AChessPiece
 	GENERATED_BODY()
 	
 public:	
+	FString Type;
 	// Sets default values for this actor's properties
 	AGPawn();
 	void GetValidMoves() override;

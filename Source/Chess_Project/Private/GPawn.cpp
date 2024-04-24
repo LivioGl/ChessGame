@@ -15,7 +15,7 @@ AGPawn::AGPawn()
 
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackPawn");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhitePawn");
-
+	Type = "GPawn";
 }
 
 void AGPawn::GetValidMoves()

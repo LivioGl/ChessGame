@@ -19,6 +19,7 @@ public:
 
 	bool bIsCaptured = false;
 	bool bHumanTeam = true;
+	FString Type;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FVector2D PieceGridPosition;

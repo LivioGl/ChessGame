@@ -14,6 +14,7 @@ class CHESS_PROJECT_API AKing : public AChessPiece
 	GENERATED_BODY()
 	
 public:	
+	FString Type;
 	// Sets default values for this actor's properties
 	AKing();
 	void GetValidMoves() override;
@@ -22,11 +23,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	USceneComponent* Scene;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* StaticMeshComponent;*/
+	bool IsKingUnderCheck(AGameField* Field);
 
 public:	
 	// Called every frame

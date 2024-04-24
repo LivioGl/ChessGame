@@ -13,6 +13,7 @@ class CHESS_PROJECT_API ARook : public AChessPiece
 	GENERATED_BODY()
 	
 public:	
+	FString Type;
 	// Sets default values for this actor's properties
 	ARook();
 	void GetValidMoves() override;

@@ -15,6 +15,7 @@ ARook::ARook()
 	StaticMeshComponent->SetupAttachment(Scene);
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackRook");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteRook");
+	Type = "Rook";
 
 }
 

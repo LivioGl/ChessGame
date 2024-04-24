@@ -43,13 +43,25 @@ void AHumanPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
-//// OnTurn() 
+// Checking King Security
 void AHumanPlayer::OnTurn()
 {
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	IsMyTurn = true;
-	// Debug String
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Your Turn"));
-	//UMainGameInstance->SetTurnMessage(TEXT("Human Turn"));
+	/*
+	for (auto& Piece : GameMode->Field->WhitePieces)
+	{
+		Piece->GetValidMoves();
+	}
+	for (auto& Move : GameMode->ValidMoves)
+	{
+		AChessPiece* MPiece = GameMode->MakeMove(Move, false);
+		
+	}*/
+
+
+
 }
 //
 void AHumanPlayer::OnWin()
@@ -82,6 +94,7 @@ void AHumanPlayer::OnClick()
 	// Check if I clicked something and MyTurn is true
 	if (Hit.bBlockingHit && IsMyTurn)
 	{
+
 		if (AChessPiece* PickedPiece = Cast<AChessPiece>(Hit.GetActor()))
 		{
 			// Click on a human team piece
