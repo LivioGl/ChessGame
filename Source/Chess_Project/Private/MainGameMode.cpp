@@ -66,15 +66,17 @@ void AMainGameMode::StartGame()
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	
 
-	StartGame();
+	// Create Players
+	AHumanPlayer* HumanPlayer = Cast<AHumanPlayer>(*TActorIterator<AHumanPlayer>(GetWorld()));
+	Players.Add(HumanPlayer);
+	auto AiPlayer = GetWorld()->SpawnActor<ARandomPlayer>();
+	Players.Add(AiPlayer);
 
-	IsGameOver = false;
-	
+	// Create Field
 	if(GFieldClass != nullptr)
 	{
-		// Spawn Actor di tipo Class e salvo come attributo il puntatore, così posso accederci in qualsiasi momento
+		// GameField reference
 		Field = GetWorld()->SpawnActor<AGameField>(GFieldClass);
 
 	}
@@ -82,31 +84,16 @@ void AMainGameMode::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("GFieldClass null"));
 	}
-
 	
-	AHumanPlayer* HumanPlayer = Cast<AHumanPlayer>(*TActorIterator<AHumanPlayer>(GetWorld()));
-	// Add Human and AI Player
-	Players.Add(HumanPlayer);
-	auto AiPlayer = GetWorld()->SpawnActor<ARandomPlayer>();
-	Players.Add(AiPlayer);
 
 	// Camera
 	FVector CameraPosition = Field->GetActorLocation() + FVector(500, 500, 1000);
 	HumanPlayer->SetActorLocationAndRotation(CameraPosition, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
-
-	// Cast<AHumanPlayer>(Players[CurrentPlayer])->IsMyTurn = true;	
-	
+	StartGame();
+	IsGameOver = false;
 }
 
-AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
-{
-	ATile* OldTile = *(this->Field->TileMap.Find(Move.Start));
-	ATile* NewTile = *(this->Field->TileMap.Find(Move.End));
-
-	AChessPiece* MovedPiece = OldTile->GetChessPiece();
-	AChessPiece* CapturedPiece = NewTile->GetChessPiece();
-
-	// Imposta il pezzo della nuova tile al pezzo spostato,
+// Imposta il pezzo della nuova tile al pezzo spostato,
 	// La tile del pezzo spostato a quella nuova,
 	// Il pezzo della tile vecchia a nullptr
 	// 
@@ -115,6 +102,14 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 	// 
 	// Mossa reale:
 	// Sposta l'attore, cancella pezzo catturato
+
+AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
+{
+	ATile* OldTile = *(this->Field->TileMap.Find(Move.Start));
+	ATile* NewTile = *(this->Field->TileMap.Find(Move.End));
+
+	AChessPiece* MovedPiece = OldTile->GetChessPiece();
+	AChessPiece* CapturedPiece = NewTile->GetChessPiece();
 
 	if (Move.CapturedChessPiece)
 	{
@@ -128,12 +123,14 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 		}
 		else
 		{
+			// Mancata rimozione di pezzi quando si mangia una pedina
 			CapturedPiece->bIsCaptured = true;
 		}
 	}
 
 	NewTile->SetChessPiece(MovedPiece);
 
+	// Nuova aggiunta (line 137)
 	if (MovedPiece)
 	{
 		MovedPiece->SetGridPosition(NewTile->GetGridPosition());
@@ -148,6 +145,27 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 	}
 
 	return CapturedPiece;
+}
+
+void AMainGameMode::UnmakeMove(ChessMove& Move)
+{
+	ATile* OldTile = *(this->Field->TileMap.Find(Move.Start));
+	ATile* NewTile = *(this->Field->TileMap.Find(Move.End));
+
+	OldTile->SetChessPiece(Move.MovedChessPiece);
+	NewTile->SetChessPiece(Move.CapturedChessPiece);
+
+	Move.MovedChessPiece->SetGridPosition(OldTile->GetGridPosition());
+	if (Move.bIsCaptured)
+	{
+		Move.CapturedChessPiece->bIsCaptured = false;
+		Move.CapturedChessPiece->SetGridPosition(NewTile->GetGridPosition());
+	}
+	else
+	{
+		(*Field->TileMap.Find(Move.End))->SetChessPiece(nullptr);
+	}
+
 }
 
 

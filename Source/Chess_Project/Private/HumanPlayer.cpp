@@ -50,6 +50,8 @@ void AHumanPlayer::OnTurn()
 	if (GameMode->IsGameOver) return;
 	IsMyTurn = true;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Your Turn"));
+
+	GameMode->ValidMoves.Empty();
 	
 	for (auto& Piece : GameMode->Field->WhitePieces)
 	{
@@ -62,10 +64,11 @@ void AHumanPlayer::OnTurn()
 		// Simulate the move
 		AChessPiece* MPiece = GameMode->MakeMove(Move, false);
 		
-		if (!King->IsKingUnderCheck(GameMode->Field))
+		if (King->IsKingUnderCheck(GameMode->Field))
 		{
 			MovesToRemove.Add(Move);
 		}
+		GameMode->UnmakeMove(Move);
 	}
 	for (auto& Move : MovesToRemove)
 	{

@@ -80,7 +80,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 		WhitePawn->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhitePawn->SetGridPosition(1, b);
 		ChangeMaterial(WhitePawn, false);
-		this->TileMap[FVector2D(1, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(1, b)]->SetTileStatus(0, ETileStatus::OCCUPIED);
 		this->TileMap[FVector2D(1, b)]->SetChessPiece(WhitePawn);
 		WhitePieces.Add(WhitePawn);
 	}
@@ -110,7 +110,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 		WhiteBishop->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhiteBishop->SetGridPosition(0, b);
 		ChangeMaterial(WhiteBishop, false);
-		this->TileMap[FVector2D(0, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(0, b)]->SetTileStatus(0, ETileStatus::OCCUPIED);
 		this->TileMap[FVector2D(0, b)]->SetChessPiece(WhiteBishop);
 		WhitePieces.Add(WhiteBishop);
 	}
@@ -140,7 +140,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 		WhiteRook->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 		WhiteRook->SetGridPosition(0, b);
 		ChangeMaterial(WhiteRook, false);
-		this->TileMap[FVector2D(0, b)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+		this->TileMap[FVector2D(0, b)]->SetTileStatus(0, ETileStatus::OCCUPIED);
 		this->TileMap[FVector2D(0, b)]->SetChessPiece(WhiteRook);
 		WhitePieces.Add(WhiteRook);
 	}
@@ -169,7 +169,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 	WhiteKing->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	WhiteKing->SetGridPosition(0, 4);
 	ChangeMaterial(WhiteKing, false);
-	this->TileMap[FVector2D(0, 4)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+	this->TileMap[FVector2D(0, 4)]->SetTileStatus(0, ETileStatus::OCCUPIED);
 	this->TileMap[FVector2D(0, 4)]->SetChessPiece(WhiteKing);
 	WhitePieces.Add(WhiteKing);
 	GameMode->Players[0]->King = WhiteKing;
@@ -195,7 +195,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 	WhiteQueen->SetActorScale3D(FVector(PieceScale, PieceScale, 0.2));
 	WhiteQueen->SetGridPosition(0, 3);
 	ChangeMaterial(WhiteQueen, false);
-	this->TileMap[FVector2D(0, 3)]->SetTileStatus(1, ETileStatus::OCCUPIED);
+	this->TileMap[FVector2D(0, 3)]->SetTileStatus(0, ETileStatus::OCCUPIED);
 	this->TileMap[FVector2D(0, 3)]->SetChessPiece(WhiteQueen);
 	WhitePieces.Add(WhiteQueen);
 

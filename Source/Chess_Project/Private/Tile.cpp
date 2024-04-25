@@ -17,6 +17,7 @@ ATile::ATile()
 	StaticMeshComponent->SetupAttachment(Scene);
 
 	Status = ETileStatus::EMPTY;
+	Piece = nullptr;
 	PlayerOwner = -1;
 	TileGridPosition = FVector2D(0, 0);
 
@@ -47,6 +48,7 @@ AChessPiece* ATile::GetChessPiece()
 void ATile::SetChessPiece(AChessPiece* NewPiece)
 {
 	Piece = NewPiece;
+	Status = NewPiece == nullptr ? ETileStatus::EMPTY : ETileStatus::OCCUPIED;
 }
 
 void ATile::SetGridPosition(const double InX, const double InY)

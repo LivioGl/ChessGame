@@ -37,8 +37,8 @@ public:
 	int32 FieldSize;
 
 	// Pointer to main class ChessPiece: Piece reference
-	UPROPERTY(VisibleAnywhere)
-	AChessPiece* Piece;
+	/*UPROPERTY(VisibleAnywhere)
+	AChessPiece* Piece;*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;
@@ -55,6 +55,7 @@ public:
 	TArray<ChessMove> ValidMoves;
 
 	AChessPiece* MakeMove(ChessMove& Move, bool bIsRealMove);
+	void UnmakeMove(ChessMove& Move);
 
 	void MovePieceToLocation(AChessPiece* CPiece, FVector2D Location) const;
 

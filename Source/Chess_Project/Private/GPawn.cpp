@@ -25,6 +25,7 @@ void AGPawn::GetValidMoves()
 	AGameField* Field = GameMode->Field;
 	// Current Pawn position saved in this pointer
 	
+	//ATile** NewTile;
 	ATile** NewTile;
 	// Checking the (x, y+1) tile
 	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(bHumanTeam ? 1 : -1, 0));
@@ -38,6 +39,8 @@ void AGPawn::GetValidMoves()
 	{
 		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition(), (*NewTile)->GetChessPiece()));
 	}
+
+
 	// Checking the (x+1, y+1) tile, for capturing enemy pieces
 	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(bHumanTeam ? 1 : -1, 1));
 	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::OCCUPIED && (*NewTile)->GetChessPiece()->bHumanTeam != this->bHumanTeam)

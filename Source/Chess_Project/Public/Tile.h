@@ -56,12 +56,15 @@ public:
 	const FString Black = TEXT("/Game/Materials/MI_Black");
 	const FString White = TEXT("/Game/Materials/MI_Tile");
 
+	// Pointer to piece actually occupying this tile 
+	AChessPiece* Piece = nullptr;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// Pointer to piece actually occupying this tile 
-	AChessPiece* Piece = nullptr;
+	
 
 	// Componente scena
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")

@@ -37,6 +37,8 @@ void ABishop::GetValidMoves()
 		while (auto NewTiles = Field->TileMap.Find(BishopCurrentPosition + BMovements[i]))
 		{
 			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
+
+			// New line 41: instead of (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam. Aggiunto un contro sull'esistenza di *NewTiles->GetChessPiece(). Fatto in tutti i file cpp pedine
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
