@@ -2,6 +2,7 @@
 
 
 #include "GameField.h"
+#include "MainGameMode.h"
 
 // Sets default values
 AGameField::AGameField()
@@ -68,6 +69,7 @@ void AGameField::GenerateField()
 
 void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*> &BPieces)
 {
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	// Spawning White Pawns
 	for (int32 b = 0; b < 8; b++)
 	{
@@ -170,6 +172,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 	this->TileMap[FVector2D(0, 4)]->SetTileStatus(1, ETileStatus::OCCUPIED);
 	this->TileMap[FVector2D(0, 4)]->SetChessPiece(WhiteKing);
 	WhitePieces.Add(WhiteKing);
+	GameMode->Players[0]->King = WhiteKing;
 
 	// Spawning Black King
 	FVector BlackKingLocation = AGameField::GetRelativeLocationByXYPosition(7, 4);
@@ -183,6 +186,7 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 	this->TileMap[FVector2D(7, 4)]->SetTileStatus(1, ETileStatus::OCCUPIED);
 	this->TileMap[FVector2D(7, 4)]->SetChessPiece(BlackKing);
 	BlackPieces.Add(BlackKing);
+	GameMode->Players[1]->King = BlackKing;
 	
 	// Spawning White Queen
 	FVector WhiteQueenLocation = AGameField::GetRelativeLocationByXYPosition(0, 3);

@@ -2,6 +2,7 @@
 
 #pragma once
 
+
 #include "ChessMove.h"
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
@@ -29,11 +30,13 @@ public:
 	TArray<ChessMove> Moves;
 	void AllMoves(AMainGameMode* GameMode, TArray<ChessMove>& AllMoves);
 	void DeleteChecks(AMainGameMode* GameMode, TArray<ChessMove>& AllMoves);
+	AKing* King;
 	int32 PlayerNumber;
 	bool PlayerTeam;
 	
 	virtual void OnTurn() {};
 	virtual void OnWin() {};
+	virtual void OnTie() {};
 	virtual void OnLose() {};
 	
 };

@@ -66,10 +66,12 @@ void AMainGameMode::StartGame()
 void AMainGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	IsGameOver = false;
-	// Camera
-	AHumanPlayer* HumanPlayer = Cast<AHumanPlayer>(*TActorIterator<AHumanPlayer>(GetWorld()));
+	
 
+	StartGame();
+
+	IsGameOver = false;
+	
 	if(GFieldClass != nullptr)
 	{
 		// Spawn Actor di tipo Class e salvo come attributo il puntatore, così posso accederci in qualsiasi momento
@@ -80,15 +82,20 @@ void AMainGameMode::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("GFieldClass null"));
 	}
-	FVector CameraPosition = Field->GetActorLocation() + FVector(500, 500, 1000);
-	HumanPlayer->SetActorLocationAndRotation(CameraPosition, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
+
 	
+	AHumanPlayer* HumanPlayer = Cast<AHumanPlayer>(*TActorIterator<AHumanPlayer>(GetWorld()));
 	// Add Human and AI Player
 	Players.Add(HumanPlayer);
 	auto AiPlayer = GetWorld()->SpawnActor<ARandomPlayer>();
 	Players.Add(AiPlayer);
-	this->StartGame();
 
+	// Camera
+	FVector CameraPosition = Field->GetActorLocation() + FVector(500, 500, 1000);
+	HumanPlayer->SetActorLocationAndRotation(CameraPosition, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
+
+	// Cast<AHumanPlayer>(Players[CurrentPlayer])->IsMyTurn = true;	
+	
 }
 
 AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
@@ -127,16 +134,18 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 
 	NewTile->SetChessPiece(MovedPiece);
 
-	MovedPiece->SetGridPosition(NewTile->GetGridPosition());
-	OldTile->SetChessPiece(nullptr);
-	// New line
-	NewTile->SetTileStatus(MovedPiece->bHumanTeam ? 0 : -1, ETileStatus::OCCUPIED);
-	if (bIsRealMove)
+	if (MovedPiece)
 	{
-		MovePieceToLocation(MovedPiece, NewTile->GetGridPosition());
-		OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+		MovedPiece->SetGridPosition(NewTile->GetGridPosition());
+		OldTile->SetChessPiece(nullptr);
+		// New line
+		NewTile->SetTileStatus(MovedPiece->bHumanTeam ? 0 : -1, ETileStatus::OCCUPIED);
+		if (bIsRealMove)
+		{
+			MovePieceToLocation(MovedPiece, NewTile->GetGridPosition());
+			OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
+		}
 	}
-	
 
 	return CapturedPiece;
 }

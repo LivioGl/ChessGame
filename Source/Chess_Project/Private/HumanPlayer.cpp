@@ -47,36 +47,70 @@ void AHumanPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AHumanPlayer::OnTurn()
 {
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	if (GameMode->IsGameOver) return;
 	IsMyTurn = true;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Your Turn"));
-	/*
+	
 	for (auto& Piece : GameMode->Field->WhitePieces)
 	{
 		Piece->GetValidMoves();
 	}
+	TArray<ChessMove> MovesToRemove;
+
 	for (auto& Move : GameMode->ValidMoves)
 	{
+		// Simulate the move
 		AChessPiece* MPiece = GameMode->MakeMove(Move, false);
 		
-	}*/
+		if (!King->IsKingUnderCheck(GameMode->Field))
+		{
+			MovesToRemove.Add(Move);
+		}
+	}
+	for (auto& Move : MovesToRemove)
+	{
+		GameMode->ValidMoves.Remove(Move);
+	}
 
-
+	// checking for CheckMate
+	if (GameMode->ValidMoves.IsEmpty())
+	{
+		if (King->IsKingUnderCheck(GameMode->Field))
+		{
+			OnLose();
+		}
+		else
+		{
+			OnTie();
+		}
+	}
 
 }
-//
+
 void AHumanPlayer::OnWin()
 {
 	// Debug String
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Win!"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You Win!"));
 	//GameInstance->SetTurnMessage(TEXT("Human Wins!"));
 	//GameInstance->IncrementScoreHumanPlayer();
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	GameMode->IsGameOver = true;
 }
-//
+
+void AHumanPlayer::OnTie()
+{
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("That's a tie!"));
+	GameMode->IsGameOver = true;
+
+}
+
 void AHumanPlayer::OnLose()
 {
 	// Debug String
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Lose!"));
-	//GameInstance->SetTurnMessage(TEXT("Human Loses!"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You Lose!"));
+	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	GameMode->IsGameOver = true;
 }
 
 void AHumanPlayer::OnClick()

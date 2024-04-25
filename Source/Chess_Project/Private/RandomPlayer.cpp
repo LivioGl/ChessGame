@@ -38,12 +38,44 @@ void ARandomPlayer::OnTurn()
 	FTimerHandle TimerHandle;
 	
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
-	// Calcolo delle mosse valide dall'Array BlackPieces
-	// Randomizza una mossa valida
+	if (GameMode->IsGameOver) return;
 	
+	for (auto& Piece : GameMode->Field->WhitePieces)
+	{
+		Piece->GetValidMoves();
+	}
+	TArray<ChessMove> MovesToRemove;
 
+	for (auto& Move : GameMode->ValidMoves)
+	{
+		// Simulate the move
+		AChessPiece* MPiece = GameMode->MakeMove(Move, false);
+
+		if (!King->IsKingUnderCheck(GameMode->Field))
+		{
+			MovesToRemove.Add(Move);
+		}
+	}
+	for (auto& Move : MovesToRemove)
+	{
+		GameMode->ValidMoves.Remove(Move);
+	}
+
+
+	if (GameMode->ValidMoves.IsEmpty())
+	{
+		if (King->IsKingUnderCheck(GameMode->Field))
+		{
+			OnLose();
+		}
+		else
+		{
+			OnTie();
+		}
+	}
+
+	if (GameMode->IsGameOver) return;
 	// Black Pieces Array
-
 	int32 RandIdx = FMath::Rand() % GameMode->Field->BlackPieces.Num();
 	GameMode->Field->BlackPieces[RandIdx]->GetValidMoves();
 	// Se il pezzo non ha mosse valide ne pesco un altro
@@ -62,11 +94,16 @@ void ARandomPlayer::OnTurn()
 
 void ARandomPlayer::OnWin()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha vinto!"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Bot wins!"));
+}
+
+void ARandomPlayer::OnTie()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Black, TEXT("That's a tie!"));
 }
 
 void ARandomPlayer::OnLose()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Il Bot ha perso!"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("The bot is a loser!"));
 }
 

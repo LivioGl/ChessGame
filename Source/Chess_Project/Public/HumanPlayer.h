@@ -26,13 +26,15 @@ public:
 
 	// game instance reference
 	UMainGameInstance* GameInstance;
+
+	// keeps track of turn
+	bool IsMyTurn;
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// keeps track of turn
-	bool IsMyTurn;
+	
 
 public:	
 	// Called every frame
@@ -43,6 +45,7 @@ public:
 	
 	virtual void OnTurn() override;
 	virtual void OnWin() override;
+	virtual void OnTie() override;
 	virtual void OnLose() override;
 	// called on left mouse click (binding)
 	UFUNCTION()
