@@ -17,6 +17,7 @@ ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final)
 	MovedChessPiece = Piece;
 	Start = Initial;
 	End = Final;
+	CapturedChessPiece = nullptr;
 }
 
 ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured)
@@ -25,8 +26,7 @@ ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, ACh
 	Start = Initial;
 	End = Final;
 	CapturedChessPiece = Captured;
-
-
+	bIsCaptured = Captured != nullptr;
 }
 
 bool ChessMove::operator==(const ChessMove& Other) const

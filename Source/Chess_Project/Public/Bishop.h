@@ -14,7 +14,7 @@ class CHESS_PROJECT_API ABishop : public AChessPiece
 	GENERATED_BODY()
 	
 public:	
-	FString Type;
+
 	// Sets default values for this actor's properties
 	ABishop();
 	void GetValidMoves() override;

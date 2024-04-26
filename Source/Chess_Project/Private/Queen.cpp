@@ -14,7 +14,7 @@ AQueen::AQueen()
 
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackQueen");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteQueen");
-	Type = "Queen";
+	Type = PieceType::QUEEN;
 
 }
 

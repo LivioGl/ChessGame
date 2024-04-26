@@ -16,7 +16,7 @@ AKnight::AKnight()
 
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackKnight");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteKnight");
-	Type = "Knight";
+	Type = PieceType::KNIGHT;
 
 }
 

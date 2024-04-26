@@ -8,6 +8,17 @@
 #include "GameFramework/Actor.h"
 #include "ChessPiece.generated.h"
 
+enum class PieceType
+{
+	EMPTY,
+	BISHOP,
+	PAWN,
+	ROOK,
+	KNIGHT,
+	QUEEN,
+	KING
+};
+
 UCLASS()
 class CHESS_PROJECT_API AChessPiece : public AActor
 {
@@ -19,7 +30,8 @@ public:
 
 	bool bIsCaptured = false;
 	bool bHumanTeam = true;
-	FString Type;
+
+	PieceType Type = PieceType::EMPTY;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FVector2D PieceGridPosition;

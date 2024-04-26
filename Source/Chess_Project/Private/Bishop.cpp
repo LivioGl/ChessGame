@@ -15,7 +15,7 @@ ABishop::ABishop()
 	StaticMeshComponent->SetupAttachment(Scene);
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackBishop");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
-	Type = "Bishop";
+	Type = PieceType::BISHOP;
 }
 
 void ABishop::GetValidMoves()

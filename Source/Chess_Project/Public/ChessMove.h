@@ -16,7 +16,7 @@ public:
 	FVector2D Start;
 	FVector2D End;
 	// Pointer to captured piece
-	AChessPiece* CapturedChessPiece = nullptr;
+	AChessPiece* CapturedChessPiece;
 
 	bool bIsCaptured = false;
 

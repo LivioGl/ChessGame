@@ -130,7 +130,6 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 
 	NewTile->SetChessPiece(MovedPiece);
 
-	// Nuova aggiunta (line 137)
 	if (MovedPiece)
 	{
 		MovedPiece->SetGridPosition(NewTile->GetGridPosition());

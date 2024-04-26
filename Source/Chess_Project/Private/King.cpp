@@ -15,7 +15,7 @@ AKing::AKing()
 	StaticMeshComponent->SetupAttachment(Scene);
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackKing");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteKing");
-	Type = "King";
+	Type = PieceType::KING;
 }
 
 void AKing::GetValidMoves()
@@ -83,7 +83,7 @@ bool AKing::IsKingUnderCheck(AGameField* Field)
 				auto Piece = (*NewTile)->GetChessPiece();
 				if (Piece != nullptr)
 				{
-					if ((Piece->Type == "Rook" || Piece->Type == "Queen")
+					if ((Piece->Type == PieceType::ROOK || Piece->Type == PieceType::QUEEN)
 						&& Piece->bHumanTeam != this->bHumanTeam)
 						return true;
 					else break;
@@ -113,7 +113,7 @@ bool AKing::IsKingUnderCheck(AGameField* Field)
 			{
 				auto Piece = (*NewTile)->GetChessPiece();
 				if (Piece == nullptr) continue;
-				if (Piece->Type == "King" && Piece->bHumanTeam != this->bHumanTeam) return true;
+				if (Piece->Type == PieceType::KING  && Piece->bHumanTeam != this->bHumanTeam) return true;
 			}
 			
 		}
@@ -137,7 +137,7 @@ bool AKing::IsKingUnderCheck(AGameField* Field)
 			{
 				auto Piece = (*NewTile)->GetChessPiece();
 				if (Piece == nullptr) continue;
-				if (Piece->Type == "Knight" && Piece->bHumanTeam != this->bHumanTeam) return true;
+				if (Piece->Type == PieceType::KNIGHT && Piece->bHumanTeam != this->bHumanTeam) return true;
 			}
 		}
 	}
@@ -154,11 +154,12 @@ bool AKing::IsKingUnderCheck(AGameField* Field)
 			while (auto NewTile = Field->TileMap.Find(this->GetGridPosition() + Diagonals[d]))
 			{
 				auto Piece = (*NewTile)->GetChessPiece();
-				if (Piece != nullptr) {
-
-					if ((Piece->Type == "Bishop" || Piece->Type == "Queen")
-						&& Piece->bHumanTeam != this->bHumanTeam)
+				if (Piece != nullptr) 
+				{
+					if ((Piece->Type == PieceType::BISHOP || Piece->Type == PieceType::QUEEN) && Piece->bHumanTeam != this->bHumanTeam)
+					{
 						return true;
+					}
 					else break;
 				}
 
@@ -176,18 +177,18 @@ bool AKing::IsKingUnderCheck(AGameField* Field)
 		if (auto NewPiece = Field->TileMap.Find(this->GetGridPosition() + FVector2D(bIsWhite ? 1 : -1, 1)))
 		{
 			AChessPiece* CPiece = (*NewPiece)->GetChessPiece();
-			if (CPiece && CPiece->Type == "GPawn" && CPiece->bHumanTeam != this->bHumanTeam)
+			if (CPiece && CPiece->Type == PieceType::PAWN && CPiece->bHumanTeam != this->bHumanTeam)
 				return true;
 		}
 
 		if (auto TileToCheck = Field->TileMap.Find(this->GetGridPosition() + FVector2D(bIsWhite ? 1 : -1, -1)))
 		{
 			AChessPiece* CPiece = (*TileToCheck)->GetChessPiece();
-			if (CPiece && CPiece->Type == "GPawn" && CPiece->bHumanTeam != this->bHumanTeam)
+			if (CPiece && CPiece->Type == PieceType::PAWN && CPiece->bHumanTeam != this->bHumanTeam)
 				return true;
 		}
 	}
-	// All controls finished, king is no under check
+	// All controls finished, king is not under check
 	return false;
 }
 
