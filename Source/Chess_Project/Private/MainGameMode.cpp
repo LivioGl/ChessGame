@@ -115,10 +115,9 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 	{
 		if (bIsRealMove)
 		{
-			Move.MovedChessPiece->bHumanTeam ?
-				this->Field->WhitePieces.Remove(CapturedPiece) :
-				this->Field->BlackPieces.Remove(CapturedPiece);
-			
+			this->Field->WhitePieces.Remove(CapturedPiece);
+			this->Field->BlackPieces.Remove(CapturedPiece);
+		
 			CapturedPiece->Destroy();
 		}
 		else
@@ -130,17 +129,15 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 
 	NewTile->SetChessPiece(MovedPiece);
 
-	if (MovedPiece)
+	MovedPiece->SetGridPosition(NewTile->GetGridPosition());
+	OldTile->SetChessPiece(nullptr);
+
+	// New line
+	NewTile->SetTileStatus(MovedPiece->bHumanTeam ? 0 : 1, ETileStatus::OCCUPIED);
+	if (bIsRealMove)
 	{
-		MovedPiece->SetGridPosition(NewTile->GetGridPosition());
-		OldTile->SetChessPiece(nullptr);
-		// New line
-		NewTile->SetTileStatus(MovedPiece->bHumanTeam ? 0 : -1, ETileStatus::OCCUPIED);
-		if (bIsRealMove)
-		{
-			MovePieceToLocation(MovedPiece, NewTile->GetGridPosition());
-			OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
-		}
+		MovePieceToLocation(MovedPiece, NewTile->GetGridPosition());
+		OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
 	}
 
 	return CapturedPiece;

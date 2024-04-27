@@ -146,8 +146,6 @@ void AHumanPlayer::OnClick()
 				FVector2D StartingPosition = FVector2D(PickedPiece->PieceGridPosition.X, PickedPiece->PieceGridPosition.Y);
 				for (auto& Move : GameMode->ValidMoves)
 				{
-					auto tileMap = GameMode->Field->TileMap;
-					UE_LOG(LogTemp, Warning, TEXT("Move.End contains: %f %f"), Move.End.X, Move.End.Y);
 					if (GameMode->Field->TileMap.Contains(Move.End))
 					{
 						ATile* TileToChange = GameMode->Field->TileMap[Move.End];

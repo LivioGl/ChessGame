@@ -3,6 +3,8 @@
 
 #include "Tile.h"
 
+#include "ChessPiece.h"
+
 // Sets default values
 ATile::ATile()
 {
@@ -49,6 +51,7 @@ void ATile::SetChessPiece(AChessPiece* NewPiece)
 {
 	Piece = NewPiece;
 	Status = NewPiece == nullptr ? ETileStatus::EMPTY : ETileStatus::OCCUPIED;
+	PlayerOwner = NewPiece == nullptr ? -1 : NewPiece->bHumanTeam;
 }
 
 void ATile::SetGridPosition(const double InX, const double InY)
