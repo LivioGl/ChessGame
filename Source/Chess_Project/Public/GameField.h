@@ -29,11 +29,11 @@ public:
 	UPROPERTY(Transient)
 	TArray<ATile*> TileArray;
 
-	//given a position returns a tile
+	// given a position returns a tile
 	UPROPERTY(Transient)
 	TMap<FVector2D, ATile*> TileMap;
 
-	static const int32 NOT_ASSIGNED = -1; // Capire a cosa serve
+	// static const int32 NOT_ASSIGNED = -1;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float NormalizedCellPadding;
@@ -44,7 +44,6 @@ public:
 
 	// Event
 	FResetTileMaterial HintClearEvent;
-
 
 	// TSubclassOf template class that provides UClass type safety
 
@@ -84,14 +83,8 @@ public:
 	// Called when an instance of this class is placed (in editor) or spawned
 	virtual void OnConstruction(const FTransform& Transform) override;
 
-	// remove all signs from the field
-	// UFUNCTION(BlueprintCallable)
-	// void ResetField();
-
 	// generate an empty game field
 	void GenerateField();
-
-	
 
 	// Assign black or white color to a piece
 	void ChangeMaterial(AChessPiece* S, bool IsBlack);
@@ -122,7 +115,4 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	// virtual void Tick(float DeltaTime) override;
-
 };

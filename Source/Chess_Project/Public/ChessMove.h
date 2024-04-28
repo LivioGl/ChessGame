@@ -6,9 +6,8 @@
 #include "CoreMinimal.h"
 
 extern class AChessPiece;
-/**
- * 
- */
+
+// This class implements moves administration on the board
 class CHESS_PROJECT_API ChessMove
 {
 public:
@@ -24,7 +23,5 @@ public:
 	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final);
 	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured);
 
-	
 	bool operator==(const ChessMove& Other) const;
-
 };

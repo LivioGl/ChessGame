@@ -23,8 +23,6 @@ public:
 	
 	// camera component attacched to player pawn
 	UCameraComponent* Camera;
-
-	// game instance reference
 	UMainGameInstance* GameInstance;
 
 	// keeps track of turn
@@ -33,8 +31,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	
 
 public:	
 	// Called every frame

@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Bishop.h"
-//#include "GameField.h"
 #include "MainGameMode.h"
 
 
@@ -9,10 +8,12 @@ ABishop::ABishop()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	// Scene Component
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
+	// File Path to assign correct material
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackBishop");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteBishop");
 	Type = PieceType::BISHOP;
@@ -20,7 +21,6 @@ ABishop::ABishop()
 
 void ABishop::GetValidMoves()
 {
-	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
 	// Current Bishop position saved in this pointer
@@ -36,9 +36,7 @@ void ABishop::GetValidMoves()
 	{
 		while (auto NewTiles = Field->TileMap.Find(BishopCurrentPosition + BMovements[i]))
 		{
-			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces
-
-			// New line 41: instead of (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam. Aggiunto un contro sull'esistenza di *NewTiles->GetChessPiece(). Fatto in tutti i file cpp pedine
+			// Check the directions where Bishop is able to move and gets empty tiles or enemy pieces			
 			if ((*NewTiles)->GetTileStatus() == ETileStatus::EMPTY || (*NewTiles)->GetChessPiece()->bHumanTeam != this->bHumanTeam)
 			{
 				// Save the move in a gamemode array
@@ -58,13 +56,11 @@ void ABishop::GetValidMoves()
 void ABishop::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void ABishop::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 

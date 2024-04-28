@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Tile.generated.h"
 
-// Gestione delle caselle
+// Tile administration
 
 UENUM()
 enum class ETileStatus : uint8
@@ -59,14 +59,11 @@ public:
 	// Pointer to piece actually occupying this tile 
 	AChessPiece* Piece = nullptr;
 
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	
-
-	// Componente scena
+	// Scene component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USceneComponent* Scene;
 
@@ -85,7 +82,5 @@ protected:
 
 public:	
 
-	// Called every frame
-	// virtual void Tick(float DeltaTime) override;
 
 };

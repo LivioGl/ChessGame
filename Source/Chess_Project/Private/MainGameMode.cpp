@@ -16,7 +16,6 @@ AMainGameMode::AMainGameMode()
 	PlayerControllerClass = APlayerController_Chess::StaticClass();
 	DefaultPawnClass = AHumanPlayer::StaticClass();
 	FieldSize = 8;
-
 }
 
 int32 AMainGameMode::GetNextPlayer(int32 Player)
@@ -58,7 +57,6 @@ void AMainGameMode::StartGame()
 	// Move counter +=1
 	Players[0]->PlayerTeam = true;
 	Players[1]->PlayerTeam = false;
-
 	Players[CurrentPlayer]->OnTurn();
 }
 
@@ -76,16 +74,12 @@ void AMainGameMode::BeginPlay()
 	// Create Field
 	if(GFieldClass != nullptr)
 	{
-		// GameField reference
 		Field = GetWorld()->SpawnActor<AGameField>(GFieldClass);
-
 	}
 	else 
 	{
 		UE_LOG(LogTemp, Error, TEXT("GFieldClass null"));
 	}
-	
-
 	// Camera
 	FVector CameraPosition = Field->GetActorLocation() + FVector(500, 500, 1000);
 	HumanPlayer->SetActorLocationAndRotation(CameraPosition, FRotationMatrix::MakeFromX(FVector(0, 0, -1)).Rotator());
@@ -93,18 +87,10 @@ void AMainGameMode::BeginPlay()
 	IsGameOver = false;
 }
 
-// Imposta il pezzo della nuova tile al pezzo spostato,
-	// La tile del pezzo spostato a quella nuova,
-	// Il pezzo della tile vecchia a nullptr
-	// 
-	// Cattura:
-	// Cancella il pezzo catturato dal TileArray
-	// 
-	// Mossa reale:
-	// Sposta l'attore, cancella pezzo catturato
 
 AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 {
+	// Sets tile where i moved the piece to NewTile, same as old tile to nullptr
 	ATile* OldTile = *(this->Field->TileMap.Find(Move.Start));
 	ATile* NewTile = *(this->Field->TileMap.Find(Move.End));
 
@@ -113,6 +99,7 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 
 	if (Move.CapturedChessPiece)
 	{
+		// if it is not a move simulation
 		if (bIsRealMove)
 		{
 			this->Field->WhitePieces.Remove(CapturedPiece);
@@ -122,17 +109,13 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 		}
 		else
 		{
-			// Mancata rimozione di pezzi quando si mangia una pedina
 			CapturedPiece->bIsCaptured = true;
 		}
 	}
-
 	NewTile->SetChessPiece(MovedPiece);
-
 	MovedPiece->SetGridPosition(NewTile->GetGridPosition());
 	OldTile->SetChessPiece(nullptr);
 
-	// New line
 	NewTile->SetTileStatus(MovedPiece->bHumanTeam ? 0 : 1, ETileStatus::OCCUPIED);
 	if (bIsRealMove)
 	{
@@ -143,6 +126,7 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 	return CapturedPiece;
 }
 
+// This function allows to go back after simulating a move, concerning checks about king security
 void AMainGameMode::UnmakeMove(ChessMove& Move)
 {
 	ATile* OldTile = *(this->Field->TileMap.Find(Move.Start));

@@ -10,9 +10,6 @@
 #include "EnhancedInputSubsystems.h"
 #include "PlayerController_Chess.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class CHESS_PROJECT_API APlayerController_Chess : public APlayerController
 {

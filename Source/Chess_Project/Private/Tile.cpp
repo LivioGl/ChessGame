@@ -10,11 +10,9 @@ ATile::ATile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	// Per creare la tile
+	// Scene component
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
-
-	// every actor has a RootComponent that defines the transform in the World
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
 
@@ -82,13 +80,5 @@ void ATile::ResetMaterial()
 void ATile::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
-/* void ATile::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-*/

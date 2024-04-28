@@ -12,11 +12,10 @@ AHumanPlayer::AHumanPlayer()
 	PrimaryActorTick.bCanEverTick = false;
 	// Set this pawn to be controlled by the lowest-numbered player (Human)
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
-	// create a camera component
+	// camera component
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	//set the camera as RootComponent
+	// set the camera as RootComponent
 	SetRootComponent(Camera);
-	// get the game instance reference
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	// default init values
 	PlayerNumber = -1;
@@ -26,21 +25,18 @@ AHumanPlayer::AHumanPlayer()
 void AHumanPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AHumanPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void AHumanPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 // Checking King Security
@@ -61,7 +57,7 @@ void AHumanPlayer::OnTurn()
 
 	for (auto& Move : GameMode->ValidMoves)
 	{
-		// Simulate the move
+		// Simulate the move by putting second argument to false
 		AChessPiece* MPiece = GameMode->MakeMove(Move, false);
 		
 		if (King->IsKingUnderCheck(GameMode->Field))
@@ -94,8 +90,6 @@ void AHumanPlayer::OnWin()
 {
 	// Debug String
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You Win!"));
-	//GameInstance->SetTurnMessage(TEXT("Human Wins!"));
-	//GameInstance->IncrementScoreHumanPlayer();
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	GameMode->IsGameOver = true;
 }
@@ -118,10 +112,8 @@ void AHumanPlayer::OnLose()
 
 void AHumanPlayer::OnClick()
 {
-	// Gamemode reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
-
-	//Structure containing information about one hit of a trace, such as point of impact and surface normal at that point
+	// Structure containing information about one hit of a trace, such as point of impact and surface normal at that point
 	// Info about where I clicked
 	FHitResult Hit = FHitResult(ForceInit);
 
@@ -131,7 +123,6 @@ void AHumanPlayer::OnClick()
 	// Check if I clicked something and MyTurn is true
 	if (Hit.bBlockingHit && IsMyTurn)
 	{
-
 		if (AChessPiece* PickedPiece = Cast<AChessPiece>(Hit.GetActor()))
 		{
 			// Click on a human team piece
@@ -170,9 +161,8 @@ void AHumanPlayer::OnClick()
 				ChessMove CandidateMove = ChessMove(ClickedPiece, ClickedPiece->GetGridPosition(), PickedPiece->GetGridPosition(), PickedPiece);
 				if (!GameMode->ValidMoves.Contains(CandidateMove)) return;	
 				
-				// Chiamata a MakeMove
+				// MakeMove call
 				AChessPiece* CapturedPiece = GameMode->MakeMove(CandidateMove, true);
-
 				GameMode->Field->HintClearEvent.Broadcast();
 				GameMode->ValidMoves.Empty();
 				IsMyTurn = false;		
@@ -181,6 +171,7 @@ void AHumanPlayer::OnClick()
 			}		
 		}	
 
+		// Moving a piece to an empty tile
 		if (ATile* PickedTile = Cast<ATile>(Hit.GetActor()))
 		{
 			if (!ClickedPiece)
@@ -194,11 +185,6 @@ void AHumanPlayer::OnClick()
 			ChessMove CandidateMove = ChessMove(ClickedPiece, ClickedPiece->GetGridPosition(), NewTile->GetGridPosition());
 			if (!GameMode->ValidMoves.Contains(CandidateMove)) return;
 			AChessPiece* MovedPiece = GameMode->MakeMove(CandidateMove, true);
-
-			// FATTO IN MAKEMOVE: NewTile->SetTileStatus(0, ETileStatus::OCCUPIED);
-			// Setting old tile to empty and tile's player owner to -1
-			//ATile* OldTile = Field->TileMap[ClickedPiece->GetGridPosition()];
-			//OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
 			
 			GameMode->Field->HintClearEvent.Broadcast();
 			GameMode->ValidMoves.Empty();

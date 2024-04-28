@@ -9,10 +9,12 @@ AKing::AKing()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	// Scene component
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
+	// // File Path to assign correct material
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackKing");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteKing");
 	Type = PieceType::KING;
@@ -20,7 +22,6 @@ AKing::AKing()
 
 void AKing::GetValidMoves()
 {
-	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
 	// Current King position saved in this pointer
@@ -54,16 +55,10 @@ void AKing::GetValidMoves()
 	}
 }
 
-
-
-
-
-
 // Called when the game starts or when spawned
 void AKing::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 bool AKing::IsKingUnderCheck(AGameField* Field)

@@ -9,11 +9,12 @@ AKnight::AKnight()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	// Scene component
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
-
+	// // File Path to assign correct material
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackKnight");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhiteKnight");
 	Type = PieceType::KNIGHT;
@@ -22,7 +23,6 @@ AKnight::AKnight()
 
 void AKnight::GetValidMoves()
 {
-	// Gamemode and Gamefield reference
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
 	// Current Knight position saved in this pointer
@@ -60,12 +60,10 @@ void AKnight::GetValidMoves()
 void AKnight::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AKnight::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }

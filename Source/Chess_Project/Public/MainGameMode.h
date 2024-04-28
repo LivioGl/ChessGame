@@ -9,9 +9,6 @@
 #include "GameFramework/GameModeBase.h"
 #include "MainGameMode.generated.h"
 
-/**
- *
- */
 UCLASS()
 class CHESS_PROJECT_API AMainGameMode : public AGameModeBase
 {
@@ -36,10 +33,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 FieldSize;
 
-	// Pointer to main class ChessPiece: Piece reference
-	/*UPROPERTY(VisibleAnywhere)
-	AChessPiece* Piece;*/
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 Size;
 
@@ -50,13 +43,12 @@ public:
 
 	// Called at the end of the game turn
 	void TurnNextPlayer();
-
 	void StartGame();
-	TArray<ChessMove> ValidMoves;
 
+	// array that contains all valid moves
+	TArray<ChessMove> ValidMoves;
 	AChessPiece* MakeMove(ChessMove& Move, bool bIsRealMove);
 	void UnmakeMove(ChessMove& Move);
-
 	void MovePieceToLocation(AChessPiece* CPiece, FVector2D Location) const;
 
 	

@@ -15,21 +15,18 @@ ARandomPlayer::ARandomPlayer()
 void ARandomPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void ARandomPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void ARandomPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ARandomPlayer::OnTurn()
@@ -86,7 +83,7 @@ void ARandomPlayer::OnTurn()
 	GameMode->ValidMoves.Empty();
 	GameMode->TurnNextPlayer();
 
-	}, 2, false);
+	}, 1.5, false);
 }
 
 void ARandomPlayer::OnWin()

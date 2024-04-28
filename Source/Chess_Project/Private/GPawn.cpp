@@ -8,11 +8,12 @@ AGPawn::AGPawn()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	// Scene component
 	Scene = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 	SetRootComponent(Scene);
 	StaticMeshComponent->SetupAttachment(Scene);
-
+	// File Path to assign correct material
 	MaterialBlack = TEXT("/Game/Materials/MI_BlackPawn");
 	MaterialWhite = TEXT("/Game/Materials/MI_WhitePawn");
 	Type = PieceType::PAWN;

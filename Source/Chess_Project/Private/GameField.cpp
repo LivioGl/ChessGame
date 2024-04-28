@@ -39,8 +39,7 @@ void AGameField::ChangeMaterial(AChessPiece* S, bool IsBlack)
 
 void AGameField::GenerateField()
 {
-	// Spawning Tile
-
+	// Spawning chess board
 	for (int32 x = 0; x < Size; x++)
 	{
 		for (int32 y = 0; y < Size; y++)
@@ -225,7 +224,6 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 		WhitePieces.Add(WhiteKnight);
 	}
 
-
 	// Spawning Black Knights
 	for (int32 b = 1; b < 7; b += 5)
 	{
@@ -242,8 +240,6 @@ void AGameField::SpawnPieces(TArray<AChessPiece*> &WPieces, TArray<AChessPiece*>
 		BlackPieces.Add(BlackKnight);
 	}
 }
-
-
 
 TArray<ATile*>& AGameField::GetTileArray()
 {
@@ -269,12 +265,4 @@ inline bool AGameField::IsValidPosition(const FVector2D Position) const
 	return 0 <= Position[0] && Position[0] < Size && 0 <= Position[1] && Position[1] < Size;
 }
 
-// Called every frame
-/*
-void AGameField::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-*/
 

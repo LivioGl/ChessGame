@@ -22,7 +22,6 @@ void AChessPiece::BeginPlay()
 void AChessPiece::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 
