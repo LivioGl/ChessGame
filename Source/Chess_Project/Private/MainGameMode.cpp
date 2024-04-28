@@ -31,12 +31,6 @@ int32 AMainGameMode::GetNextPlayer(int32 Player)
 void AMainGameMode::TurnNextPlayer()
 {
 	CurrentPlayer = GetNextPlayer(CurrentPlayer);
-	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
-		{
-			// function to delay
-			Players[CurrentPlayer]->OnTurn();
-		}, 2, false);
 	Players[CurrentPlayer]->OnTurn();
 }
 

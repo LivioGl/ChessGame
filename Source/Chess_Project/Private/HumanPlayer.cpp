@@ -134,6 +134,7 @@ void AHumanPlayer::OnClick()
 				// Calculate Valid Moves
 				GameMode->ValidMoves.Empty();
 				PickedPiece->GetValidMoves();
+				DeleteChecks(GameMode);
 				FVector2D StartingPosition = FVector2D(PickedPiece->PieceGridPosition.X, PickedPiece->PieceGridPosition.Y);
 				for (auto& Move : GameMode->ValidMoves)
 				{

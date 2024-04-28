@@ -25,10 +25,12 @@ class CHESS_PROJECT_API IPlayerInterface
 
 public:
 
-	TArray<ChessMove> Moves;
 	AKing* King;
 	int32 PlayerNumber;
 	bool PlayerTeam;
+
+	void AllMoves(AMainGameMode* GameMode);
+	void DeleteChecks(AMainGameMode* GameMode);
 	
 	virtual void OnTurn() {};
 	virtual void OnWin() {};

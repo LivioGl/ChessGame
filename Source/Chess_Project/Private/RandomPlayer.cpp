@@ -38,28 +38,7 @@ void ARandomPlayer::OnTurn()
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	if (GameMode->IsGameOver) return;
 	
-	for (auto& Piece : GameMode->Field->BlackPieces)
-	{
-		Piece->GetValidMoves();
-	}
-	TArray<ChessMove> MovesToRemove;
-
-	for (auto& Move : GameMode->ValidMoves)
-	{
-		// Simulate the move
-		AChessPiece* MPiece = GameMode->MakeMove(Move, false);
-
-		if (King->IsKingUnderCheck(GameMode->Field))
-		{
-			MovesToRemove.Add(Move);
-		}
-		GameMode->UnmakeMove(Move);
-	}
-	for (auto& Move : MovesToRemove)
-	{
-		GameMode->ValidMoves.Remove(Move);
-	}
-
+	this->AllMoves(GameMode);
 
 	if (GameMode->ValidMoves.IsEmpty())
 	{
