@@ -38,7 +38,7 @@ void ARandomPlayer::OnTurn()
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	if (GameMode->IsGameOver) return;
 	
-	this->AllMoves(GameMode);
+		this->AllMoves(GameMode);
 
 	if (GameMode->ValidMoves.IsEmpty())
 	{
@@ -57,10 +57,10 @@ void ARandomPlayer::OnTurn()
 	if (GameMode->IsGameOver) return;
 	// Black Pieces Array
 	
-	int32 MoveRand = FMath::Rand() % GameMode->ValidMoves.Num();
-	AChessPiece* BlackMovedPiece = GameMode->MakeMove(GameMode->ValidMoves[MoveRand], true);
-	GameMode->ValidMoves.Empty();
-	GameMode->TurnNextPlayer();
+		int32 MoveRand = FMath::Rand() % GameMode->ValidMoves.Num();
+		AChessPiece* BlackMovedPiece = GameMode->MakeMove(GameMode->ValidMoves[MoveRand], true);
+		GameMode->ValidMoves.Empty();
+		GameMode->TurnNextPlayer();
 
 	}, 1.5, false);
 }

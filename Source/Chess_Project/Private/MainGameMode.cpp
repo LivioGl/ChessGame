@@ -42,12 +42,14 @@ void AMainGameMode::MovePieceToLocation(AChessPiece* CPiece, FVector2D Location)
 
 void AMainGameMode::PawnPromotion(AChessPiece* PromotedPiece)
 {
-	FVector PromotedPiecePosition = this->Field->GetRelativeLocationByXYPosition(PromotedPiece->GetGridPosition().X, PromotedPiece->GetGridPosition().Y);
+	FVector2D PromotedPiecePosition = FVector2D(PromotedPiece->GetGridPosition().X, PromotedPiece->GetGridPosition().Y);
 	bool Team = PromotedPiece->bHumanTeam;
+	PromotedPiece->bHumanTeam ? Field->WhitePieces.Remove(PromotedPiece) : Field->BlackPieces.Remove(PromotedPiece);
 	PromotedPiece->Destroy();
-	PromotedPiece = GetWorld()->SpawnActor<AQueen>(Field->Queen, PromotedPiecePosition, FRotator::ZeroRotator);
+	PromotedPiece = GetWorld()->SpawnActor<AQueen>(Field->Queen, Field->GetRelativeLocationByXYPosition(PromotedPiecePosition.X, PromotedPiecePosition.Y), FRotator::ZeroRotator);
 	PromotedPiece->bHumanTeam = Team;
-	PromotedPiece->SetGridPosition(PromotedPiecePosition.X, PromotedPiecePosition.Y);
+	PromotedPiece->SetGridPosition(PromotedPiecePosition);
+	this->Field->TileMap[PromotedPiecePosition]->SetChessPiece(PromotedPiece);
 	Field->ChangeMaterial(PromotedPiece, !Team);
 	PromotedPiece->bHumanTeam ? this->Field->WhitePieces.AddUnique(PromotedPiece) : this->Field->BlackPieces.AddUnique(PromotedPiece);
 }
