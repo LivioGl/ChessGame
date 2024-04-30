@@ -7,6 +7,7 @@
 
 extern class AChessPiece;
 
+
 // This class implements moves administration on the board
 class CHESS_PROJECT_API ChessMove
 {
@@ -18,6 +19,7 @@ public:
 	AChessPiece* CapturedChessPiece;
 
 	bool bIsCaptured = false;
+	bool bIsPromotion = false;
 
 	ChessMove();
 	ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final);

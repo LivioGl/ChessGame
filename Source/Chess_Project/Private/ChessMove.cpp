@@ -18,6 +18,11 @@ ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final)
 	Start = Initial;
 	End = Final;
 	CapturedChessPiece = nullptr;
+	if (Piece->Type == PieceType::PAWN && (End.X == 0 || End.X == 7))
+	{
+		bIsPromotion = true;
+	}
+		
 }
 
 ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, AChessPiece* Captured)
@@ -27,6 +32,10 @@ ChessMove::ChessMove(AChessPiece* Piece, FVector2D Initial, FVector2D Final, ACh
 	End = Final;
 	CapturedChessPiece = Captured;
 	bIsCaptured = Captured != nullptr;
+	if (Piece->Type == PieceType::PAWN && (End.X == 0 || End.X == 7))
+	{
+		bIsPromotion = true;
+	}
 }
 
 bool ChessMove::operator==(const ChessMove& Other) const

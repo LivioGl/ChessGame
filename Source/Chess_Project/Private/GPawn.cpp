@@ -25,18 +25,18 @@ void AGPawn::GetValidMoves()
 	AMainGameMode* GameMode = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
 	AGameField* Field = GameMode->Field;
 	// Current Pawn position saved in this pointer
-	
-	//ATile** NewTile;
+	bool bIsForwardEmpty = false;
 	ATile** NewTile;
 	// Checking the (x, y+1) tile
 	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(bHumanTeam ? 1 : -1, 0));
 	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::EMPTY)
 	{
 		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition(), (*NewTile)->GetChessPiece()));
+		bIsForwardEmpty = true;
 	}
 	// Checking the (x, y+2) tile
 	NewTile = Field->TileMap.Find(PieceGridPosition+FVector2D(bHumanTeam ? 2 : -2, 0));
-	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::EMPTY && this->GetGridPosition().X == (bHumanTeam ? 1 : 6))
+	if (NewTile && (*NewTile)->GetTileStatus() == ETileStatus::EMPTY && (this->GetGridPosition().X == (bHumanTeam ? 1 : 6)) && bIsForwardEmpty)
 	{
 		GameMode->ValidMoves.Add(ChessMove(this, PieceGridPosition, (*NewTile)->GetGridPosition(), (*NewTile)->GetChessPiece()));
 	}

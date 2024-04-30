@@ -48,8 +48,11 @@ public:
 	// array that contains all valid moves
 	TArray<ChessMove> ValidMoves;
 	AChessPiece* MakeMove(ChessMove& Move, bool bIsRealMove);
+	// function to go back after simulating a move (step necessary to check king security)
 	void UnmakeMove(ChessMove& Move);
 	void MovePieceToLocation(AChessPiece* CPiece, FVector2D Location) const;
+
+	void PawnPromotion(AChessPiece* PromotedPiece);
 
 	
 protected:

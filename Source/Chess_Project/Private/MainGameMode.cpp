@@ -40,6 +40,18 @@ void AMainGameMode::MovePieceToLocation(AChessPiece* CPiece, FVector2D Location)
 
 }
 
+void AMainGameMode::PawnPromotion(AChessPiece* PromotedPiece)
+{
+	FVector PromotedPiecePosition = this->Field->GetRelativeLocationByXYPosition(PromotedPiece->GetGridPosition().X, PromotedPiece->GetGridPosition().Y);
+	bool Team = PromotedPiece->bHumanTeam;
+	PromotedPiece->Destroy();
+	PromotedPiece = GetWorld()->SpawnActor<AQueen>(Field->Queen, PromotedPiecePosition, FRotator::ZeroRotator);
+	PromotedPiece->bHumanTeam = Team;
+	PromotedPiece->SetGridPosition(PromotedPiecePosition.X, PromotedPiecePosition.Y);
+	Field->ChangeMaterial(PromotedPiece, !Team);
+	PromotedPiece->bHumanTeam ? this->Field->WhitePieces.AddUnique(PromotedPiece) : this->Field->BlackPieces.AddUnique(PromotedPiece);
+}
+
 void AMainGameMode::StartGame()
 {
 	// Human player starts
@@ -98,7 +110,7 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 		{
 			this->Field->WhitePieces.Remove(CapturedPiece);
 			this->Field->BlackPieces.Remove(CapturedPiece);
-		
+
 			CapturedPiece->Destroy();
 		}
 		else
@@ -116,6 +128,18 @@ AChessPiece* AMainGameMode::MakeMove(ChessMove& Move, bool bIsRealMove)
 		MovePieceToLocation(MovedPiece, NewTile->GetGridPosition());
 		OldTile->SetTileStatus(-1, ETileStatus::EMPTY);
 	}
+	
+
+	if (Move.bIsPromotion)
+	{
+		// Funzione per cambiare pedina
+		if (bIsRealMove) 
+		{
+			PawnPromotion(MovedPiece);
+		}
+		MovedPiece->Type = PieceType::QUEEN;
+	}
+
 
 	return CapturedPiece;
 }
@@ -130,6 +154,9 @@ void AMainGameMode::UnmakeMove(ChessMove& Move)
 	NewTile->SetChessPiece(Move.CapturedChessPiece);
 
 	Move.MovedChessPiece->SetGridPosition(OldTile->GetGridPosition());
+	if (Move.bIsPromotion) {
+		Move.MovedChessPiece->Type = PieceType::PAWN;
+	}
 	if (Move.bIsCaptured)
 	{
 		Move.CapturedChessPiece->bIsCaptured = false;
